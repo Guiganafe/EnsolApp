@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "520634916391",
+    "project_id": "ensolapp-c1236",
+    "storage_bucket": "ensolapp-c1236.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520634916391:android:b446ef99b940a38012b802",
+        "android_client_info": {
+          "package_name": "com.example.ensolapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520634916391-db64ivh3vckvss8gc266m6dogn9qpbcr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1IuYFadxY2Avcbj6OxVtXCshyi5gtxJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520634916391-db64ivh3vckvss8gc266m6dogn9qpbcr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
