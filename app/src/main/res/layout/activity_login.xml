@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".Activity.LoginActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLogin1"
@@ -30,12 +30,20 @@
         app:layout_constraintGuide_begin="20dp"
         app:layout_constraintGuide_percent="0.6" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLogin4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.7" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edt_login_email"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:hint="E-mail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintBottom_toTopOf="@+id/guidelineLogin2"
@@ -53,7 +61,7 @@
         android:id="@+id/edt_login_senha"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:hint="Senha"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:layout_constraintBottom_toTopOf="@+id/guidelineLogin3"
@@ -66,5 +74,16 @@
             android:layout_height="wrap_content" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login_entrar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Entrar"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineLogin4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineLogin3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
