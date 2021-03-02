@@ -7,6 +7,14 @@
     tools:context=".Activity.LoginActivity">
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLogin1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,6 +46,15 @@
         app:layout_constraintGuide_begin="20dp"
         app:layout_constraintGuide_percent="0.7" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/logo_ensol"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineLogin1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineLogin" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edt_login_email"
@@ -77,10 +94,11 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login_entrar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Entrar"
         android:layout_margin="5dp"
+        android:backgroundTint="@color/yellow"
         app:layout_constraintBottom_toTopOf="@+id/guidelineLogin4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

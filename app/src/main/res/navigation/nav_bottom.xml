@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_bottom"
+    app:startDestination="@id/coletasFragment">
+
+    <fragment
+        android:id="@+id/coletasFragment"
+        android:name="com.example.ensolapp.Fragments.ColetasFragment"
+        android:label="fragment_coletas"
+        tools:layout="@layout/fragment_coletas" />
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.example.ensolapp.Fragments.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
+</navigation>
