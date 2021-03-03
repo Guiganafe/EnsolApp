@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="200px"
+        android:layout_height="100dp"
         android:background="@color/blue"
         android:gravity="center"
         android:text="Visita Técnica \n Informações sobre o cliente"
@@ -200,7 +200,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_marginEnd="5dp"
-            android:backgroundTint="@color/blue"
+            android:backgroundTint="@color/yellow"
             android:text="Cancelar" />
 
         <com.google.android.material.button.MaterialButton
@@ -209,7 +209,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_marginStart="5dp"
-            android:backgroundTint="@color/yellow"
+            android:backgroundTint="@color/blue"
             android:text="Avançar" />
 
     </LinearLayout>

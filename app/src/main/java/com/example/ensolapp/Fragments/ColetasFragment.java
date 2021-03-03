@@ -13,15 +13,23 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ensolapp.Activity.VisitaTecnicaActivity;
 import com.example.ensolapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.Format;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class ColetasFragment extends Fragment {
 
     private FloatingActionButton fab_novo_form;
+    private TextView tv_dia_selecionado;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,10 +43,22 @@ public class ColetasFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         inicializarComponentes(view);
         onClickController();
+        definirData();
+    }
+
+    private void definirData() {
+        Calendar cal = Calendar.getInstance();
+        int dia = cal.get(Calendar.DAY_OF_MONTH), mes = cal.get(Calendar.MONTH) + 1, ano = cal.get(Calendar.YEAR);
+        tv_dia_selecionado.setText(String.format(Locale.getDefault(),"%d/%d/%d", dia, mes, ano));
     }
 
     private void onClickController() {
         fab_novo_form.setOnClickListener(v -> novoForm());
+        tv_dia_selecionado.setOnClickListener(v -> selecionarData());
+    }
+
+    private void selecionarData() {
+        Toast.makeText(requireActivity(), "Ainda não implementado!", Toast.LENGTH_SHORT).show();
     }
 
     private void novoForm() {
@@ -48,6 +68,7 @@ public class ColetasFragment extends Fragment {
 
     private void inicializarComponentes(View view) {
         fab_novo_form = view.findViewById(R.id.fab_add_form);
+        tv_dia_selecionado = view.findViewById(R.id.tv_dia_selecionado);
     }
 }
 
