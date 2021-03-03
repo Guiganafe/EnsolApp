@@ -15,6 +15,7 @@
             app:tint="@color/white"
             android:src="@drawable/ic_add_branco"
             android:backgroundTint="@color/yellow"
+            app:borderWidth="0dp"
             android:contentDescription="Adicionar formulário"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
