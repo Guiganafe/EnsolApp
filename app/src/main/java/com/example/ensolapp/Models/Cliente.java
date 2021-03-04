@@ -1,14 +1,20 @@
 package com.example.ensolapp.Models;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Cliente {
-    public String tipoCliente;
-    public String nomeCliente;
-    public String razaoSocial;
-    public String responsavel;
-    public String telefone;
-    public String cpf_cnpj;
-    public String email;
-    public String endereco;
+    private String tipoCliente;
+    private String nomeCliente;
+    private String razaoSocial;
+    private String responsavel;
+    private String telefone;
+    private String cpf_cnpj;
+    private String email;
+    private String endereco;
+
+    public Cliente() {
+    }
 
     public Cliente(String tipoCliente, String nomeCliente, String razaoSocial, String responsavel, String telefone, String cpf_cnpj, String email, String endereco) {
         this.tipoCliente = tipoCliente;
@@ -83,5 +89,21 @@ public class Cliente {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public Map<String, Object> toMap(){
+
+        Map<String, Object> cliente = new HashMap<>();
+
+        cliente.put("tipoCliente", getTipoCliente());
+        cliente.put("nomeCliente", getNomeCliente());
+        cliente.put("razaoSocial", getRazaoSocial());
+        cliente.put("responsavel", getResponsavel());
+        cliente.put("telefone", getTelefone());
+        cliente.put("cpf_cnpj", getCpf_cnpj());
+        cliente.put("email", getEmail());
+        cliente.put("endereco", getEndereco());
+
+        return cliente;
     }
 }

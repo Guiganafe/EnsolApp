@@ -1,9 +1,13 @@
 package com.example.ensolapp.ViewModels;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
-public class ClienteViewModel {
+public class ClienteViewModel extends ViewModel {
+
     private MutableLiveData<String> tipoCliente = new MutableLiveData<>();
+    private MutableLiveData<Integer> tipoClientePosition = new MutableLiveData<>();
     private MutableLiveData<String> nomeCliente = new MutableLiveData<>();
     private MutableLiveData<String> razaoSocial = new MutableLiveData<>();
     private MutableLiveData<String> responsavel = new MutableLiveData<>();
@@ -12,21 +16,7 @@ public class ClienteViewModel {
     private MutableLiveData<String> email = new MutableLiveData<>();
     private MutableLiveData<String> endereco = new MutableLiveData<>();
 
-    public ClienteViewModel(MutableLiveData<String> tipoCliente, MutableLiveData<String> nomeCliente,
-                            MutableLiveData<String> razaoSocial, MutableLiveData<String> responsavel,
-                            MutableLiveData<String> telefone, MutableLiveData<String> cpf_cnpj,
-                            MutableLiveData<String> email, MutableLiveData<String> endereco) {
-        this.tipoCliente = tipoCliente;
-        this.nomeCliente = nomeCliente;
-        this.razaoSocial = razaoSocial;
-        this.responsavel = responsavel;
-        this.telefone = telefone;
-        this.cpf_cnpj = cpf_cnpj;
-        this.email = email;
-        this.endereco = endereco;
-    }
-
-    public MutableLiveData<String> getTipoCliente() {
+    public LiveData<String> getTipoCliente() {
         return tipoCliente;
     }
 
@@ -34,7 +24,15 @@ public class ClienteViewModel {
         this.tipoCliente.setValue(tipoCliente);
     }
 
-    public MutableLiveData<String> getNomeCliente() {
+    public LiveData<Integer> getTipoClientePosition() {
+        return tipoClientePosition;
+    }
+
+    public void setTipoClientePosition(Integer tipoClientePosition) {
+        this.tipoClientePosition.setValue(tipoClientePosition);
+    }
+
+    public LiveData<String> getNomeCliente() {
         return nomeCliente;
     }
 
@@ -42,7 +40,7 @@ public class ClienteViewModel {
         this.nomeCliente.setValue(nomeCliente);
     }
 
-    public MutableLiveData<String> getRazaoSocial() {
+    public LiveData<String> getRazaoSocial() {
         return razaoSocial;
     }
 
@@ -50,7 +48,7 @@ public class ClienteViewModel {
         this.razaoSocial.setValue(razaoSocial);
     }
 
-    public MutableLiveData<String> getResponsavel() {
+    public LiveData<String> getResponsavel() {
         return responsavel;
     }
 
@@ -58,7 +56,7 @@ public class ClienteViewModel {
         this.responsavel.setValue(responsavel);
     }
 
-    public MutableLiveData<String> getTelefone() {
+    public LiveData<String> getTelefone() {
         return telefone;
     }
 
@@ -66,7 +64,7 @@ public class ClienteViewModel {
         this.telefone.setValue(telefone);
     }
 
-    public MutableLiveData<String> getCpf_cnpj() {
+    public LiveData<String> getCpf_cnpj() {
         return cpf_cnpj;
     }
 
@@ -74,7 +72,7 @@ public class ClienteViewModel {
         this.cpf_cnpj.setValue(cpf_cnpj);
     }
 
-    public MutableLiveData<String> getEmail() {
+    public LiveData<String> getEmail() {
         return email;
     }
 
@@ -82,7 +80,7 @@ public class ClienteViewModel {
         this.email.setValue(email);
     }
 
-    public MutableLiveData<String> getEndereco() {
+    public LiveData<String> getEndereco() {
         return endereco;
     }
 

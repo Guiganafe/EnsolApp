@@ -24,13 +24,10 @@ public class FirebaseService {
 
     private static void inicializarFirebase() {
         firebaseAuth = FirebaseAuth.getInstance();
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    firebaseUser = user;
-                }
+        authStateListener = firebaseAuth -> {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if(user != null){
+                firebaseUser = user;
             }
         };
         firebaseAuth.addAuthStateListener(authStateListener);

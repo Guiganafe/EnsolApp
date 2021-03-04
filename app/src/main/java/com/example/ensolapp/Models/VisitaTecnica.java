@@ -1,41 +1,28 @@
 package com.example.ensolapp.Models;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class VisitaTecnica {
-    public Date dataVisita;
-    public String padraoEntrada;
-    public String aperagemDisjuntosEntrada;
-    public String conficaoPadraoEntrada;
-    public String localInstalacaoModulos;
-    public String materialEstruturaTelhado;
-    public String condicaoTelhado;
-    public String orientacaoTelhado;
-    public String larguraTelhado;
-    public String comprimentoTelhado;
-    public String alturaTelhado;
-    public String acessoEscada;
-    public String acessoAndaime;
-    public String obsFinais;
+    private Date dataVisita;
+    private Map<String, Object> cliente;
+    private String padraoEntrada;
+    private String aperagemDisjuntosEntrada;
+    private String condicaoPadraoEntrada;
+    private String localInstalacaoModulos;
+    private String materialEstruturaTelhado;
+    private String condicaoTelhado;
+    private String orientacaoTelhado;
+    private String larguraTelhado;
+    private String comprimentoTelhado;
+    private String alturaTelhado;
+    private String acessoEscada;
+    private String acessoAndaime;
+    private String obsFinais;
+    private String tecnicoId;
 
-    public VisitaTecnica(Date dataVisita, String padraoEntrada, String aperagemDisjuntosEntrada, String conficaoPadraoEntrada,
-                         String localInstalacaoModulos, String materialEstruturaTelhado, String condicaoTelhado,
-                         String orientacaoTelhado, String larguraTelhado, String comprimentoTelhado,
-                         String alturaTelhado, String acessoEscada, String acessoAndaime, String obsFinais) {
-        this.dataVisita = dataVisita;
-        this.padraoEntrada = padraoEntrada;
-        this.aperagemDisjuntosEntrada = aperagemDisjuntosEntrada;
-        this.conficaoPadraoEntrada = conficaoPadraoEntrada;
-        this.localInstalacaoModulos = localInstalacaoModulos;
-        this.materialEstruturaTelhado = materialEstruturaTelhado;
-        this.condicaoTelhado = condicaoTelhado;
-        this.orientacaoTelhado = orientacaoTelhado;
-        this.larguraTelhado = larguraTelhado;
-        this.comprimentoTelhado = comprimentoTelhado;
-        this.alturaTelhado = alturaTelhado;
-        this.acessoEscada = acessoEscada;
-        this.acessoAndaime = acessoAndaime;
-        this.obsFinais = obsFinais;
+    public VisitaTecnica() {
     }
 
     public Date getDataVisita() {
@@ -62,12 +49,12 @@ public class VisitaTecnica {
         this.aperagemDisjuntosEntrada = aperagemDisjuntosEntrada;
     }
 
-    public String getConficaoPadraoEntrada() {
-        return conficaoPadraoEntrada;
+    public String getCondicaoPadraoEntrada() {
+        return condicaoPadraoEntrada;
     }
 
-    public void setConficaoPadraoEntrada(String conficaoPadraoEntrada) {
-        this.conficaoPadraoEntrada = conficaoPadraoEntrada;
+    public void setCondicaoPadraoEntrada(String condicaoPadraoEntrada) {
+        this.condicaoPadraoEntrada = condicaoPadraoEntrada;
     }
 
     public String getLocalInstalacaoModulos() {
@@ -148,5 +135,45 @@ public class VisitaTecnica {
 
     public void setObsFinais(String obsFinais) {
         this.obsFinais = obsFinais;
+    }
+
+    public Map<String, Object> getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Map<String, Object> cliente) {
+        this.cliente = cliente;
+    }
+
+    public String getTecnicoId() {
+        return tecnicoId;
+    }
+
+    public void setTecnicoId(String tecnicoId) {
+        this.tecnicoId = tecnicoId;
+    }
+
+    public Map<String, Object> toMap(){
+
+        Map<String, Object> vt = new HashMap<>();
+
+        vt.put("dataVisita", getDataVisita());
+        vt.put("cliente", getCliente());
+        vt.put("padraoEntrada", getPadraoEntrada());
+        vt.put("aperagemDisjuntosEntrada", getAperagemDisjuntosEntrada());
+        vt.put("condicaoPadraoEntrada", getCondicaoPadraoEntrada());
+        vt.put("localInstalacaoModulos", getLocalInstalacaoModulos());
+        vt.put("materialEstruturaTelhado", getMaterialEstruturaTelhado());
+        vt.put("condicaoTelhado", getCondicaoTelhado());
+        vt.put("orientacaoTelhado", getOrientacaoTelhado());
+        vt.put("larguraTelhado", getLarguraTelhado());
+        vt.put("comprimentoTelhado", getComprimentoTelhado());
+        vt.put("alturaTelhado", getAlturaTelhado());
+        vt.put("acessoEscada", getAcessoEscada());
+        vt.put("acessoAndaime", getAcessoAndaime());
+        vt.put("obsFinais", getObsFinais());
+        vt.put("tecnicoId", getTecnicoId());
+
+        return vt;
     }
 }

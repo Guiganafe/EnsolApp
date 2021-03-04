@@ -1,5 +1,6 @@
 package com.example.ensolapp.ViewModels;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -7,15 +8,21 @@ import java.util.Date;
 
 public class VisitaTecnicaViewModel extends ViewModel {
 
-    private MutableLiveData<Date> dataVisita = new MutableLiveData<>();
+    private MutableLiveData<String> dataVisita = new MutableLiveData<>();
     //Dados sobre o ambiente
     private MutableLiveData<String> padraoEntrada = new MutableLiveData<>();
+    private MutableLiveData<Integer> padraoEntradaPosition = new MutableLiveData<>();
     private MutableLiveData<String> aperagemDisjuntosEntrada = new MutableLiveData<>();
-    private MutableLiveData<String> conficaoPadraoEntrada = new MutableLiveData<>();
+    private MutableLiveData<String> condicaoPadraoEntrada = new MutableLiveData<>();
+    private MutableLiveData<Integer> condicaoPadraoEntradaPositon = new MutableLiveData<>();
     private MutableLiveData<String> localInstalacaoModulos = new MutableLiveData<>();
+    private MutableLiveData<Integer> localInstalacaoModulosPosition = new MutableLiveData<>();
     private MutableLiveData<String> materialEstruturaTelhado = new MutableLiveData<>();
+    private MutableLiveData<Integer> materialEstruturaTelhadoPosition = new MutableLiveData<>();
     private MutableLiveData<String> condicaoTelhado = new MutableLiveData<>();
+    private MutableLiveData<Integer> condicaoTelhadoPosition = new MutableLiveData<>();
     private MutableLiveData<String> orientacaoTelhado = new MutableLiveData<>();
+    private MutableLiveData<Integer> orientacaoTelhadoPosition = new MutableLiveData<>();
     private MutableLiveData<String> larguraTelhado = new MutableLiveData<>();
     private MutableLiveData<String> comprimentoTelhado = new MutableLiveData<>();
     private MutableLiveData<String> alturaTelhado = new MutableLiveData<>();
@@ -23,38 +30,15 @@ public class VisitaTecnicaViewModel extends ViewModel {
     private MutableLiveData<String> acessoAndaime = new MutableLiveData<>();
     private MutableLiveData<String> obsFinais = new MutableLiveData<>();
 
-    public VisitaTecnicaViewModel(MutableLiveData<Date> dataVisita, MutableLiveData<String> padraoEntrada,
-                                  MutableLiveData<String> aperagemDisjuntosEntrada, MutableLiveData<String> conficaoPadraoEntrada,
-                                  MutableLiveData<String> localInstalacaoModulos, MutableLiveData<String> materialEstruturaTelhado,
-                                  MutableLiveData<String> condicaoTelhado, MutableLiveData<String> orientacaoTelhado,
-                                  MutableLiveData<String> larguraTelhado, MutableLiveData<String> comprimentoTelhado,
-                                  MutableLiveData<String> alturaTelhado, MutableLiveData<String> acessoEscada,
-                                  MutableLiveData<String> acessoAndaime, MutableLiveData<String> obsFinais) {
-        this.dataVisita = dataVisita;
-        this.padraoEntrada = padraoEntrada;
-        this.aperagemDisjuntosEntrada = aperagemDisjuntosEntrada;
-        this.conficaoPadraoEntrada = conficaoPadraoEntrada;
-        this.localInstalacaoModulos = localInstalacaoModulos;
-        this.materialEstruturaTelhado = materialEstruturaTelhado;
-        this.condicaoTelhado = condicaoTelhado;
-        this.orientacaoTelhado = orientacaoTelhado;
-        this.larguraTelhado = larguraTelhado;
-        this.comprimentoTelhado = comprimentoTelhado;
-        this.alturaTelhado = alturaTelhado;
-        this.acessoEscada = acessoEscada;
-        this.acessoAndaime = acessoAndaime;
-        this.obsFinais = obsFinais;
-    }
-
-    public MutableLiveData<Date> getDataVisita() {
+    public LiveData<String> getDataVisita() {
         return dataVisita;
     }
 
-    public void setDataVisita(Date dataVisita) {
+    public void setDataVisita(String dataVisita) {
         this.dataVisita.setValue(dataVisita);
     }
 
-    public MutableLiveData<String> getPadraoEntrada() {
+    public LiveData<String> getPadraoEntrada() {
         return padraoEntrada;
     }
 
@@ -62,7 +46,7 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.padraoEntrada.setValue(padraoEntrada);
     }
 
-    public MutableLiveData<String> getAperagemDisjuntosEntrada() {
+    public LiveData<String> getAperagemDisjuntosEntrada() {
         return aperagemDisjuntosEntrada;
     }
 
@@ -70,15 +54,15 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.aperagemDisjuntosEntrada.setValue(aperagemDisjuntosEntrada);
     }
 
-    public MutableLiveData<String> getConficaoPadraoEntrada() {
-        return conficaoPadraoEntrada;
+    public LiveData<String> getCondicaoPadraoEntrada() {
+        return condicaoPadraoEntrada;
     }
 
-    public void setConficaoPadraoEntrada(String conficaoPadraoEntrada) {
-        this.conficaoPadraoEntrada.setValue(conficaoPadraoEntrada);
+    public void setCondicaoPadraoEntrada(String conficaoPadraoEntrada) {
+        this.condicaoPadraoEntrada.setValue(conficaoPadraoEntrada);
     }
 
-    public MutableLiveData<String> getLocalInstalacaoModulos() {
+    public LiveData<String> getLocalInstalacaoModulos() {
         return localInstalacaoModulos;
     }
 
@@ -86,7 +70,7 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.localInstalacaoModulos.setValue(localInstalacaoModulos);
     }
 
-    public MutableLiveData<String> getMaterialEstruturaTelhado() {
+    public LiveData<String> getMaterialEstruturaTelhado() {
         return materialEstruturaTelhado;
     }
 
@@ -94,7 +78,7 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.materialEstruturaTelhado.setValue(materialEstruturaTelhado);
     }
 
-    public MutableLiveData<String> getCondicaoTelhado() {
+    public LiveData<String> getCondicaoTelhado() {
         return condicaoTelhado;
     }
 
@@ -102,7 +86,7 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.condicaoTelhado.setValue(condicaoTelhado);
     }
 
-    public MutableLiveData<String> getOrientacaoTelhado() {
+    public LiveData<String> getOrientacaoTelhado() {
         return orientacaoTelhado;
     }
 
@@ -110,7 +94,7 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.orientacaoTelhado.setValue(orientacaoTelhado);
     }
 
-    public MutableLiveData<String> getLarguraTelhado() {
+    public LiveData<String> getLarguraTelhado() {
         return larguraTelhado;
     }
 
@@ -118,7 +102,7 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.larguraTelhado.setValue(larguraTelhado);
     }
 
-    public MutableLiveData<String> getComprimentoTelhado() {
+    public LiveData<String> getComprimentoTelhado() {
         return comprimentoTelhado;
     }
 
@@ -126,7 +110,7 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.comprimentoTelhado.setValue(comprimentoTelhado);
     }
 
-    public MutableLiveData<String> getAlturaTelhado() {
+    public LiveData<String> getAlturaTelhado() {
         return alturaTelhado;
     }
 
@@ -134,7 +118,7 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.alturaTelhado.setValue(alturaTelhado);
     }
 
-    public MutableLiveData<String> getAcessoEscada() {
+    public LiveData<String> getAcessoEscada() {
         return acessoEscada;
     }
 
@@ -142,7 +126,7 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.acessoEscada.setValue(acessoEscada);
     }
 
-    public MutableLiveData<String> getAcessoAndaime() {
+    public LiveData<String> getAcessoAndaime() {
         return acessoAndaime;
     }
 
@@ -150,11 +134,59 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.acessoAndaime.setValue(acessoAndaime);
     }
 
-    public MutableLiveData<String> getObsFinais() {
+    public LiveData<String> getObsFinais() {
         return obsFinais;
     }
 
     public void setObsFinais(String obsFinais) {
         this.obsFinais.setValue(obsFinais);
+    }
+
+    public LiveData<Integer> getPadraoEntradaPosition() {
+        return padraoEntradaPosition;
+    }
+
+    public void setPadraoEntradaPosition(Integer padraoEntradaPosition) {
+        this.padraoEntradaPosition.setValue(padraoEntradaPosition);
+    }
+
+    public LiveData<Integer> getCondicaoPadraoEntradaPositon() {
+        return condicaoPadraoEntradaPositon;
+    }
+
+    public void setCondicaoPadraoEntradaPositon(Integer conficaoPadraoEntradaPositon) {
+        this.condicaoPadraoEntradaPositon.setValue(conficaoPadraoEntradaPositon);
+    }
+
+    public LiveData<Integer> getLocalInstalacaoModulosPosition() {
+        return localInstalacaoModulosPosition;
+    }
+
+    public void setLocalInstalacaoModulosPosition(Integer localInstalacaoModulosPosition) {
+        this.localInstalacaoModulosPosition.setValue(localInstalacaoModulosPosition);
+    }
+
+    public LiveData<Integer> getMaterialEstruturaTelhadoPosition() {
+        return materialEstruturaTelhadoPosition;
+    }
+
+    public void setMaterialEstruturaTelhadoPosition(Integer materialEstruturaTelhadoPosition) {
+        this.materialEstruturaTelhadoPosition.setValue(materialEstruturaTelhadoPosition);
+    }
+
+    public LiveData<Integer> getCondicaoTelhadoPosition() {
+        return condicaoTelhadoPosition;
+    }
+
+    public void setCondicaoTelhadoPosition(Integer condicaoTelhadoPosition) {
+        this.condicaoTelhadoPosition.setValue(condicaoTelhadoPosition);
+    }
+
+    public LiveData<Integer> getOrientacaoTelhadoPosition() {
+        return orientacaoTelhadoPosition;
+    }
+
+    public void setOrientacaoTelhadoPosition(Integer orientacaoTelhadoPosition) {
+        this.orientacaoTelhadoPosition.setValue(orientacaoTelhadoPosition);
     }
 }

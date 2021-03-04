@@ -37,6 +37,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/rg_padrao_entrada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -66,7 +67,7 @@
             </RadioGroup>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edt_vt_nome_amperagem_disjuntor"
+                android:id="@+id/edt_vt_amperagem_disjuntor"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +76,8 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,6 +89,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/rg_condicao_padrao_entrada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -115,34 +118,35 @@
                 android:text="Local de instalação dos módulos"
                 android:textStyle="bold" />
 
-            <LinearLayout
+            <RadioGroup
+                android:id="@+id/rg_local_instalacao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:orientation="horizontal">
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/cb_vs_local_telhado"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_local_telhado"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Telhado"/>
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/cb_vs_local_laje"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_local_laje"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Laje"/>
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/cb_vs_local_solo"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_local_solo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Solo"/>
 
-            </LinearLayout>
+            </RadioGroup>
 
             <TextView
                 android:layout_width="match_parent"
@@ -152,6 +156,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/rg_material_estrutura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -181,6 +186,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/rg_condicao_telhado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -210,6 +216,7 @@
                 android:textStyle="bold" />
 
             <RadioGroup
+                android:id="@+id/rg_orientacao_telhado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
