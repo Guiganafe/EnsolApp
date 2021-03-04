@@ -1,5 +1,6 @@
 package com.example.ensolapp.Fragments;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,9 @@ public class ColetasFragment extends Fragment {
 
     private FloatingActionButton fab_novo_form;
     private TextView tv_dia_selecionado;
+    private DatePickerDialog datePickerDialog;
+    private int dia, mes, ano, diaColeta, mesColeta, anoColeta;
+    private Calendar calendar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +54,7 @@ public class ColetasFragment extends Fragment {
     private void definirData() {
         Calendar cal = Calendar.getInstance();
         int dia = cal.get(Calendar.DAY_OF_MONTH), mes = cal.get(Calendar.MONTH) + 1, ano = cal.get(Calendar.YEAR);
-        tv_dia_selecionado.setText(String.format(Locale.getDefault(),"%d/%d/%d", dia, mes, ano));
+        tv_dia_selecionado.setText(String.format(Locale.getDefault(),"%02d/%02d/%d", dia, mes, ano));
     }
 
     private void onClickController() {
@@ -58,7 +63,22 @@ public class ColetasFragment extends Fragment {
     }
 
     private void selecionarData() {
-        Toast.makeText(requireActivity(), "Ainda não implementado!", Toast.LENGTH_SHORT).show();
+        dia = calendar.get(Calendar.DAY_OF_MONTH);
+        mes = calendar.get(Calendar.MONTH);
+        ano = calendar.get(Calendar.YEAR);
+
+        tv_dia_selecionado.setOnClickListener(v -> {
+            datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                    diaColeta = dayOfMonth;
+                    mesColeta = month;
+                    anoColeta = year;
+                    tv_dia_selecionado.setText(String.format(Locale.getDefault(),"%02d/%02d/%04d", dayOfMonth, month+1, year));
+                }
+            },ano, mes, dia);
+            datePickerDialog.show();
+        });
     }
 
     private void novoForm() {
@@ -67,6 +87,7 @@ public class ColetasFragment extends Fragment {
     }
 
     private void inicializarComponentes(View view) {
+        calendar = Calendar.getInstance();
         fab_novo_form = view.findViewById(R.id.fab_add_form);
         tv_dia_selecionado = view.findViewById(R.id.tv_dia_selecionado);
     }
