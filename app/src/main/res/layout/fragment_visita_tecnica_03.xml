@@ -21,7 +21,7 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/textView"
         android:layout_above="@id/linearLayout">
 
@@ -33,140 +33,123 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Dimensões úteis"
                 android:layout_margin="5dp"
-                android:textStyle="bold"/>
+                android:text="Material da estrutura do telhado"
+                android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edt_vt_largura_telhado"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:hint="Largura do telhado (metros)">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edt_vt_comprimento_telhado"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <RadioGroup
+                android:id="@+id/rg_material_estrutura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="Comprimento do telhado (metros)">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edt_vt_altura_telhado"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:hint="Altura do telhado (metros)">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:singleLine="true"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Acesso ao telhado:"
-                android:layout_margin="5dp"
-                android:textStyle="bold"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Até 5 metros:"
-                android:layout_marginStart="5dp"
-                android:textStyle="bold"
-                android:layout_weight="1"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Até 5 metros:"
-                android:layout_marginStart="5dp"
-                android:textStyle="bold"
-                android:layout_weight="1"/>
-
-        </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_vt_acesso_escada"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_material_madeira"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:hint="Escada">
+                    android:text="Madeira"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_vt_acesso_andaime"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_material_metalica"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
                     android:layout_weight="1"
-                    android:hint="Andaime">
+                    android:text="Metalica"/>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"/>
+            </RadioGroup>
 
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edt_vt_obs_finais"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:hint="Observações finais">
+                android:text="Condições do telhado"
+                android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputEditText
+            <RadioGroup
+                android:id="@+id/rg_condicao_telhado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_condicao_telhado_boa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="3"/>
+                    android:layout_weight="1"
+                    android:text="Boa" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_condicao_telhado_ruim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ruim" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Orientação do telhado"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/rg_orientacao_telhado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_orientacao_telhado_norte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Norte" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_orientacao_telhado_sul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Sul" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_orientacao_telhado_leste"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Leste" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_orientacao_telhado_oeste"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Oeste" />
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Foto da orientação do telhado"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/foto_orientacao_telhado"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Foto padrão" />
 
         </LinearLayout>
 
@@ -191,13 +174,13 @@
             android:text="Voltar" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_finalizar"
+            android:id="@+id/btn_vs_avancar_passo_4"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_marginStart="5dp"
             android:backgroundTint="@color/blue"
-            android:text="Finalizar" />
+            android:text="Avançar" />
 
     </LinearLayout>
 

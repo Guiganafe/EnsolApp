@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.example.ensolapp.Firebase.FirebaseService;
 import com.example.ensolapp.Models.Cliente;
@@ -34,21 +36,16 @@ import java.util.Date;
 
 public class FragmentVisitaTecnica_03 extends Fragment {
 
-    private Button btn_voltar, btn_finalizar;
-    private TextInputLayout edt_largura_telhado, edt_comprimento_telhado, edt_altura_telhado,
-            edt_acesso_escada, edt_acesso_andaime, edt_obs_finais;
-    private ClienteViewModel clienteViewModel;
+    private Button btn_voltar, btn_avancar;
+    private RadioGroup rg_material_estrutura, rg_condicao_telhado, rg_orientacao_telhado;
+    private RadioButton rb_checked;
     private VisitaTecnicaViewModel visitaTecnicaViewModel;
-
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        clienteViewModel =  new ViewModelProvider(requireActivity()).get(ClienteViewModel.class);
         visitaTecnicaViewModel = new ViewModelProvider(requireActivity()).get(VisitaTecnicaViewModel.class);
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,214 +59,67 @@ public class FragmentVisitaTecnica_03 extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         inicializarComponentes(view);
         onClickController();
-        textWatcherController();
+        radioGroupController(view);
         loadViewModelController();
     }
 
     private void loadViewModelController() {
-        String largura_telhado = visitaTecnicaViewModel.getLarguraTelhado().getValue(),
-                comprimento_telhado = visitaTecnicaViewModel.getComprimentoTelhado().getValue(),
-                altura_telhado = visitaTecnicaViewModel.getAlturaTelhado().getValue(),
-                acesso_escada = visitaTecnicaViewModel.getAcessoEscada().getValue(),
-                acesso_andaime = visitaTecnicaViewModel.getAcessoAndaime().getValue(),
-                obs_finais = visitaTecnicaViewModel.getObsFinais().getValue();
-
-        if (!TextUtils.isEmpty(largura_telhado)){
-            edt_largura_telhado.getEditText().setText(largura_telhado);
+        if(visitaTecnicaViewModel.getMaterialEstruturaTelhadoPosition().getValue() != null){
+            rg_material_estrutura.check(rg_material_estrutura.getChildAt(visitaTecnicaViewModel.getMaterialEstruturaTelhadoPosition().getValue()).getId());
         }
 
-        if (!TextUtils.isEmpty(comprimento_telhado)){
-            edt_comprimento_telhado.getEditText().setText(comprimento_telhado);
+        if(visitaTecnicaViewModel.getCondicaoTelhadoPosition().getValue() != null){
+            rg_condicao_telhado.check(rg_condicao_telhado.getChildAt(visitaTecnicaViewModel.getCondicaoTelhadoPosition().getValue()).getId());
         }
 
-        if (!TextUtils.isEmpty(altura_telhado)){
-            edt_altura_telhado.getEditText().setText(altura_telhado);
-        }
-
-        if (!TextUtils.isEmpty(acesso_escada)){
-            edt_acesso_escada.getEditText().setText(acesso_escada);
-        }
-
-        if (!TextUtils.isEmpty(acesso_andaime)){
-            edt_acesso_andaime.getEditText().setText(acesso_andaime);
-        }
-
-        if (!TextUtils.isEmpty(obs_finais)){
-            edt_obs_finais.getEditText().setText(obs_finais);
+        if(visitaTecnicaViewModel.getOrientacaoTelhadoPosition().getValue() != null){
+            rg_orientacao_telhado.check(rg_orientacao_telhado.getChildAt(visitaTecnicaViewModel.getOrientacaoTelhadoPosition().getValue()).getId());
         }
     }
 
-    private void textWatcherController() {
-        edt_largura_telhado.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    private void radioGroupController(View view) {
+        rg_material_estrutura.setOnCheckedChangeListener((group, checkedId) -> {
+            rb_checked = view.findViewById(checkedId);
+            String textoRB = rb_checked.getText().toString();
+            int position = group.indexOfChild(rb_checked);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                visitaTecnicaViewModel.setLarguraTelhado(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            visitaTecnicaViewModel.setMaterialEstruturaTelhado(textoRB);
+            visitaTecnicaViewModel.setMaterialEstruturaTelhadoPosition(position);
         });
 
-        edt_comprimento_telhado.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        rg_condicao_telhado.setOnCheckedChangeListener((group, checkedId) -> {
+            rb_checked = view.findViewById(checkedId);
+            String textoRB = rb_checked.getText().toString();
+            int position = group.indexOfChild(rb_checked);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                visitaTecnicaViewModel.setComprimentoTelhado(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            visitaTecnicaViewModel.setCondicaoTelhado(textoRB);
+            visitaTecnicaViewModel.setCondicaoTelhadoPosition(position);
         });
 
-        edt_altura_telhado.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        rg_orientacao_telhado.setOnCheckedChangeListener((group, checkedId) -> {
+            rb_checked = view.findViewById(checkedId);
+            String textoRB = rb_checked.getText().toString();
+            int position = group.indexOfChild(rb_checked);
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                visitaTecnicaViewModel.setAlturaTelhado(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_acesso_escada.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                visitaTecnicaViewModel.setAcessoEscada(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_acesso_andaime.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                visitaTecnicaViewModel.setAcessoAndaime(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_obs_finais.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                visitaTecnicaViewModel.setObsFinais(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            visitaTecnicaViewModel.setOrientacaoTelhado(textoRB);
+            visitaTecnicaViewModel.setOrientacaoTelhadoPosition(position);
         });
     }
 
     private void onClickController() {
         btn_voltar.setOnClickListener(v -> getActivity().onBackPressed());
-        btn_finalizar.setOnClickListener(v -> {
-            try {
-                salvar();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        });
-    }
 
-    private void salvar() throws ParseException {
-        boolean valido = true;
-
-        VisitaTecnica visitaTecnica = new VisitaTecnica();
-        Cliente cliente = new Cliente();
-
-        cliente.setTipoCliente(clienteViewModel.getTipoCliente().getValue());
-        cliente.setNomeCliente(clienteViewModel.getNomeCliente().getValue());
-        cliente.setRazaoSocial(clienteViewModel.getRazaoSocial().getValue());
-        cliente.setResponsavel(clienteViewModel.getResponsavel().getValue());
-        cliente.setTelefone(clienteViewModel.getTelefone().getValue());
-        cliente.setCpf_cnpj(clienteViewModel.getCpf_cnpj().getValue());
-        cliente.setEmail(clienteViewModel.getEmail().getValue());
-        cliente.setEndereco(clienteViewModel.getEndereco().getValue());
-
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(visitaTecnicaViewModel.getDataVisita().getValue());
-
-        visitaTecnica.setDataVisita(data);
-        visitaTecnica.setCliente(cliente.toMap());
-        visitaTecnica.setPadraoEntrada(visitaTecnicaViewModel.getPadraoEntrada().getValue());
-        visitaTecnica.setAperagemDisjuntosEntrada(visitaTecnicaViewModel.getAperagemDisjuntosEntrada().getValue());
-        visitaTecnica.setCondicaoPadraoEntrada(visitaTecnicaViewModel.getCondicaoPadraoEntrada().getValue());
-        visitaTecnica.setLocalInstalacaoModulos(visitaTecnicaViewModel.getLocalInstalacaoModulos().getValue());
-        visitaTecnica.setMaterialEstruturaTelhado(visitaTecnicaViewModel.getMaterialEstruturaTelhado().getValue());
-        visitaTecnica.setCondicaoTelhado(visitaTecnicaViewModel.getCondicaoTelhado().getValue());
-        visitaTecnica.setOrientacaoTelhado(visitaTecnicaViewModel.getOrientacaoTelhado().getValue());
-        visitaTecnica.setLarguraTelhado(visitaTecnicaViewModel.getLarguraTelhado().getValue());
-        visitaTecnica.setComprimentoTelhado(visitaTecnicaViewModel.getComprimentoTelhado().getValue());
-        visitaTecnica.setAlturaTelhado(visitaTecnicaViewModel.getAlturaTelhado().getValue());
-        visitaTecnica.setAcessoEscada(visitaTecnicaViewModel.getAcessoEscada().getValue());
-        visitaTecnica.setAcessoAndaime(visitaTecnicaViewModel.getAcessoAndaime().getValue());
-        visitaTecnica.setObsFinais(visitaTecnicaViewModel.getObsFinais().getValue());
-        visitaTecnica.setTecnicoId(FirebaseService.getFirebaseUser().getUid());
-
-        if(valido){
-            db.collection("visitas_tecnicas")
-                    .add(visitaTecnica.toMap())
-                    .addOnSuccessListener(documentReference -> {
-
-                    })
-                    .addOnFailureListener(e -> {
-
-                    });
-            requireActivity().finish();
-        }
+        btn_avancar.setOnClickListener(v ->
+                Navigation.findNavController(v)
+                        .navigate(R.id.action_fragmentVisitaTecnica_03_to_fragmentVisitaTecnica_04));
     }
 
     private void inicializarComponentes(View view) {
         btn_voltar = (Button) view.findViewById(R.id.btn_vs_voltar_passo_2);
-        btn_finalizar = (Button) view.findViewById(R.id.btn_finalizar);
-        edt_largura_telhado = view.findViewById(R.id.edt_vt_largura_telhado);
-        edt_comprimento_telhado = view.findViewById(R.id.edt_vt_comprimento_telhado);
-        edt_altura_telhado = view.findViewById(R.id.edt_vt_altura_telhado);
-        edt_acesso_escada = view.findViewById(R.id.edt_vt_acesso_escada);
-        edt_acesso_andaime = view.findViewById(R.id.edt_vt_acesso_andaime);
-        edt_obs_finais = view.findViewById(R.id.edt_vt_obs_finais);
+        btn_avancar = (Button) view.findViewById(R.id.btn_vs_avancar_passo_4);
+        rg_material_estrutura = view.findViewById(R.id.rg_material_estrutura);
+        rg_condicao_telhado = view.findViewById(R.id.rg_condicao_telhado);
+        rg_orientacao_telhado = view.findViewById(R.id.rg_orientacao_telhado);
     }
+
 }

@@ -1,12 +1,25 @@
 package com.example.ensolapp.Fragments;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -14,20 +27,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import com.example.ensolapp.BuildConfig;
 import com.example.ensolapp.R;
 import com.example.ensolapp.ViewModels.VisitaTecnicaViewModel;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FragmentVisitaTecnica_02 extends Fragment {
 
     private Button btn_voltar, btn_avancar;
     private TextInputLayout edt_amperagem_disjuntor;
-    private RadioGroup rg_padrao_entrada, rg_condicao_padrao_entrada, rg_local_instalacao, rg_material_estrutura,
-            rg_condicao_telhado, rg_orientacao_telhado;
+    private RadioGroup rg_padrao_entrada, rg_condicao_padrao_entrada, rg_local_instalacao;
+    private ImageView foto_padrao_entrada;
     private RadioButton rb_checked;
     private VisitaTecnicaViewModel visitaTecnicaViewModel;
+
+    public static final int CAMERA_PERM_CODE = 101;
+    public static final int CAMERA_REQUEST_CODE = 102;
+    private String currentPhotoPath;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,16 +96,10 @@ public class FragmentVisitaTecnica_02 extends Fragment {
             rg_local_instalacao.check(rg_local_instalacao.getChildAt(visitaTecnicaViewModel.getLocalInstalacaoModulosPosition().getValue()).getId());
         }
 
-        if(visitaTecnicaViewModel.getMaterialEstruturaTelhadoPosition().getValue() != null){
-            rg_material_estrutura.check(rg_material_estrutura.getChildAt(visitaTecnicaViewModel.getMaterialEstruturaTelhadoPosition().getValue()).getId());
-        }
-
-        if(visitaTecnicaViewModel.getCondicaoTelhadoPosition().getValue() != null){
-            rg_condicao_telhado.check(rg_condicao_telhado.getChildAt(visitaTecnicaViewModel.getCondicaoTelhadoPosition().getValue()).getId());
-        }
-
-        if(visitaTecnicaViewModel.getOrientacaoTelhadoPosition().getValue() != null){
-            rg_orientacao_telhado.check(rg_orientacao_telhado.getChildAt(visitaTecnicaViewModel.getOrientacaoTelhadoPosition().getValue()).getId());
+        if(visitaTecnicaViewModel.getFotoPadraoEntrada().getValue() != null){
+            foto_padrao_entrada.setBackground(null);
+            foto_padrao_entrada.setPadding(0, 0, 0, 0);
+            foto_padrao_entrada.setImageBitmap(visitaTecnicaViewModel.getFotoPadraoEntrada().getValue());
         }
     }
 
@@ -111,33 +130,6 @@ public class FragmentVisitaTecnica_02 extends Fragment {
             visitaTecnicaViewModel.setLocalInstalacaoModulos(textoRB);
             visitaTecnicaViewModel.setLocalInstalacaoModulosPosition(position);
         });
-
-        rg_material_estrutura.setOnCheckedChangeListener((group, checkedId) -> {
-            rb_checked = view.findViewById(checkedId);
-            String textoRB = rb_checked.getText().toString();
-            int position = group.indexOfChild(rb_checked);
-
-            visitaTecnicaViewModel.setMaterialEstruturaTelhado(textoRB);
-            visitaTecnicaViewModel.setMaterialEstruturaTelhadoPosition(position);
-        });
-
-        rg_condicao_telhado.setOnCheckedChangeListener((group, checkedId) -> {
-            rb_checked = view.findViewById(checkedId);
-            String textoRB = rb_checked.getText().toString();
-            int position = group.indexOfChild(rb_checked);
-
-            visitaTecnicaViewModel.setCondicaoTelhado(textoRB);
-            visitaTecnicaViewModel.setCondicaoTelhadoPosition(position);
-        });
-
-        rg_orientacao_telhado.setOnCheckedChangeListener((group, checkedId) -> {
-            rb_checked = view.findViewById(checkedId);
-            String textoRB = rb_checked.getText().toString();
-            int position = group.indexOfChild(rb_checked);
-
-            visitaTecnicaViewModel.setOrientacaoTelhado(textoRB);
-            visitaTecnicaViewModel.setOrientacaoTelhadoPosition(position);
-        });
     }
 
     private void textWatcherController() {
@@ -165,17 +157,89 @@ public class FragmentVisitaTecnica_02 extends Fragment {
         btn_avancar.setOnClickListener(v ->
                 Navigation.findNavController(v)
                         .navigate(R.id.action_fragmentVisitaTecnica_02_to_fragmentVisitaTecnica_03));
+
+        foto_padrao_entrada.setOnClickListener(v -> cameraPermissao(CAMERA_REQUEST_CODE));
     }
 
+    private void cameraPermissao(int REQUEST_CODE) {
+        if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(requireActivity(), new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+        } else {
+            if(REQUEST_CODE == 102) {
+                dispatchTakePictureIntent();
+            }
+        }
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(requireActivity(),
+                        BuildConfig.APPLICATION_ID + ".provider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CAMERA_REQUEST_CODE) {
+                File fileCam = new File(currentPhotoPath);
+                foto_padrao_entrada.setBackground(null);
+                foto_padrao_entrada.setPadding(0, 0, 0, 0);
+                foto_padrao_entrada.setImageURI(Uri.fromFile(fileCam));
+
+                Bitmap fotoCamera = BitmapFactory.decodeFile(currentPhotoPath);
+                visitaTecnicaViewModel.setFotoPadraoEntrada(fotoCamera);
+
+                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                Uri contentUri = Uri.fromFile(fileCam);
+                mediaScanIntent.setData(contentUri);
+                requireActivity().sendBroadcast(mediaScanIntent);
+                currentPhotoPath = "";
+            }
+        }
+    }
+
+
     private void inicializarComponentes(View view) {
-        btn_voltar = (Button) view.findViewById(R.id.btn_vs_voltar_passo_1);
-        btn_avancar = (Button) view.findViewById(R.id.btn_vs_avancar_passo_3);
+        btn_voltar = view.findViewById(R.id.btn_vs_voltar_passo_1);
+        btn_avancar = view.findViewById(R.id.btn_vs_avancar_passo_3);
         edt_amperagem_disjuntor = view.findViewById(R.id.edt_vt_amperagem_disjuntor);
         rg_padrao_entrada = view.findViewById(R.id.rg_padrao_entrada);
         rg_condicao_padrao_entrada = view.findViewById(R.id.rg_condicao_padrao_entrada);
         rg_local_instalacao = view.findViewById(R.id.rg_local_instalacao);
-        rg_material_estrutura = view.findViewById(R.id.rg_material_estrutura);
-        rg_condicao_telhado = view.findViewById(R.id.rg_condicao_telhado);
-        rg_orientacao_telhado = view.findViewById(R.id.rg_orientacao_telhado);
+        foto_padrao_entrada = view.findViewById(R.id.foto_padrao_entrada);
     }
 }

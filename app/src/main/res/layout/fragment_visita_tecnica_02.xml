@@ -66,6 +66,23 @@
 
             </RadioGroup>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Foto do padrão de entrada"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/foto_padrao_entrada"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Foto padrão" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edt_vt_amperagem_disjuntor"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -145,110 +162,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Solo"/>
-
-            </RadioGroup>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Material da estrutura do telhado"
-                android:textStyle="bold" />
-
-            <RadioGroup
-                android:id="@+id/rg_material_estrutura"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_vs_material_madeira"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Madeira"/>
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_vs_material_metalica"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Metalica"/>
-
-            </RadioGroup>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Condições do telhado"
-                android:textStyle="bold" />
-
-            <RadioGroup
-                android:id="@+id/rg_condicao_telhado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_vs_condicao_telhado_boa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Boa" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_vs_condicao_telhado_ruim"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Ruim" />
-
-            </RadioGroup>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="Orientação do telhado"
-                android:textStyle="bold" />
-
-            <RadioGroup
-                android:id="@+id/rg_orientacao_telhado"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_vs_orientacao_telhado_norte"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Norte" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_vs_orientacao_telhado_sul"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Sul" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_vs_orientacao_telhado_leste"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Leste" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_vs_orientacao_telhado_oeste"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Oeste" />
 
             </RadioGroup>
 

@@ -37,7 +37,7 @@ public class FragmentVisitaTecnica_01 extends Fragment {
     private RadioGroup rg_tipo_cliente;
     private RadioButton rb_checked;
     private DatePickerDialog datePickerDialog;
-    private int dia, mes, ano, diaColeta, mesColeta, anoColeta;
+    private int dia, mes, ano;
     private Calendar calendar;
     private ClienteViewModel clienteViewModel;
     private VisitaTecnicaViewModel visitaTecnicaViewModel;
@@ -248,9 +248,6 @@ public class FragmentVisitaTecnica_01 extends Fragment {
 
         edt_data.getEditText().setOnClickListener(v -> {
             datePickerDialog = new DatePickerDialog(requireContext(), (view, year, month, dayOfMonth) -> {
-                diaColeta = dayOfMonth;
-                mesColeta = month;
-                anoColeta = year;
                 String data = String.format(Locale.getDefault(),"%02d/%02d/%04d", dayOfMonth, month+1, year);
                 edt_data.getEditText().setText(data);
                 visitaTecnicaViewModel.setDataVisita(data);

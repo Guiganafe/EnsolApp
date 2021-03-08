@@ -1,5 +1,7 @@
 package com.example.ensolapp.ViewModels;
 
+import android.graphics.Bitmap;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -29,6 +31,9 @@ public class VisitaTecnicaViewModel extends ViewModel {
     private MutableLiveData<String> acessoEscada = new MutableLiveData<>();
     private MutableLiveData<String> acessoAndaime = new MutableLiveData<>();
     private MutableLiveData<String> obsFinais = new MutableLiveData<>();
+    private MutableLiveData<Bitmap> fotoPadraoEntrada = new MutableLiveData<>();
+    private MutableLiveData<Bitmap> fotoOrientacaoTelhado = new MutableLiveData<>();
+    private MutableLiveData<Bitmap> fotoAcessoTelhado = new MutableLiveData<>();
 
     public LiveData<String> getDataVisita() {
         return dataVisita;
@@ -188,5 +193,29 @@ public class VisitaTecnicaViewModel extends ViewModel {
 
     public void setOrientacaoTelhadoPosition(Integer orientacaoTelhadoPosition) {
         this.orientacaoTelhadoPosition.setValue(orientacaoTelhadoPosition);
+    }
+
+    public LiveData<Bitmap> getFotoPadraoEntrada() {
+        return fotoPadraoEntrada;
+    }
+
+    public void setFotoPadraoEntrada(Bitmap fotoPadraoEntrada) {
+        this.fotoPadraoEntrada.setValue(fotoPadraoEntrada);
+    }
+
+    public LiveData<Bitmap> getFotoOrientacaoTelhado() {
+        return fotoOrientacaoTelhado;
+    }
+
+    public void setFotoOrientacaoTelhado(Bitmap fotoOrientacaoTelhado) {
+        this.fotoOrientacaoTelhado.setValue(fotoOrientacaoTelhado);
+    }
+
+    public LiveData<Bitmap> getFotoAcessoTelhado() {
+        return fotoAcessoTelhado;
+    }
+
+    public void setFotoAcessoTelhado(Bitmap fotoAcessoTelhado) {
+        this.fotoAcessoTelhado.setValue(fotoAcessoTelhado);
     }
 }
