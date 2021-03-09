@@ -94,15 +94,31 @@ public class Cliente {
     public Map<String, Object> toMap(){
 
         Map<String, Object> cliente = new HashMap<>();
-
-        cliente.put("tipoCliente", getTipoCliente());
+        //Campos obrigatórios
         cliente.put("nomeCliente", getNomeCliente());
-        cliente.put("razaoSocial", getRazaoSocial());
-        cliente.put("responsavel", getResponsavel());
         cliente.put("telefone", getTelefone());
-        cliente.put("cpf_cnpj", getCpf_cnpj());
-        cliente.put("email", getEmail());
         cliente.put("endereco", getEndereco());
+
+        //Campos não obrigatórios
+        if(!getTipoCliente().isEmpty()){
+            cliente.put("tipoCliente", getTipoCliente());
+        }
+
+        if(!getRazaoSocial().isEmpty()){
+            cliente.put("razaoSocial", getRazaoSocial());
+        }
+
+        if(!getResponsavel().isEmpty()){
+            cliente.put("responsavel", getResponsavel());
+        }
+
+        if(!getCpf_cnpj().isEmpty()){
+            cliente.put("cpf_cnpj", getCpf_cnpj());
+        }
+
+        if(!getEmail().isEmpty()){
+            cliente.put("email", getEmail());
+        }
 
         return cliente;
     }

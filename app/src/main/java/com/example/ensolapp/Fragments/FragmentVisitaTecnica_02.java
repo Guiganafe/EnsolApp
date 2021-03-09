@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.ensolapp.BuildConfig;
 import com.example.ensolapp.R;
@@ -154,11 +155,26 @@ public class FragmentVisitaTecnica_02 extends Fragment {
     private void onClickController() {
         btn_voltar.setOnClickListener(v -> getActivity().onBackPressed());
 
-        btn_avancar.setOnClickListener(v ->
-                Navigation.findNavController(v)
-                        .navigate(R.id.action_fragmentVisitaTecnica_02_to_fragmentVisitaTecnica_03));
+        btn_avancar.setOnClickListener(this::validarDados);
 
         foto_padrao_entrada.setOnClickListener(v -> cameraPermissao(CAMERA_REQUEST_CODE));
+    }
+
+    private void validarDados(View view) {
+        boolean valido = true;
+
+        if(visitaTecnicaViewModel.getPadraoEntrada().getValue() == null){
+            Toast.makeText(requireActivity(), "Selecione um padrão de entrada", Toast.LENGTH_SHORT).show();
+            valido = false;
+        } else if(visitaTecnicaViewModel.getLocalInstalacaoModulos().getValue() == null){
+            Toast.makeText(requireActivity(), "Defina o local de instalação", Toast.LENGTH_SHORT).show();
+            valido = false;
+        }
+
+        if(valido){
+            Navigation.findNavController(view)
+                    .navigate(R.id.action_fragmentVisitaTecnica_02_to_fragmentVisitaTecnica_03);
+        }
     }
 
     private void cameraPermissao(int REQUEST_CODE) {

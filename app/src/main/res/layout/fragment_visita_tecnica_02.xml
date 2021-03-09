@@ -33,7 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Padrão de entrada"
+                android:text="Padrão de entrada*"
                 android:textStyle="bold" />
 
             <RadioGroup
@@ -132,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Local de instalação dos módulos"
+                android:text="Local de instalação dos módulos*"
                 android:textStyle="bold" />
 
             <RadioGroup

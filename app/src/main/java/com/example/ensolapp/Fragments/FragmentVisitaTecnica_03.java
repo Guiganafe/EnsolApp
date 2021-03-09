@@ -1,13 +1,25 @@
 package com.example.ensolapp.Fragments;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -15,9 +27,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.example.ensolapp.BuildConfig;
 import com.example.ensolapp.Firebase.FirebaseService;
 import com.example.ensolapp.Models.Cliente;
 import com.example.ensolapp.Models.VisitaTecnica;
@@ -30,6 +45,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,7 +56,12 @@ public class FragmentVisitaTecnica_03 extends Fragment {
     private Button btn_voltar, btn_avancar;
     private RadioGroup rg_material_estrutura, rg_condicao_telhado, rg_orientacao_telhado;
     private RadioButton rb_checked;
+    private ImageView foto_orientacao_telhado;
     private VisitaTecnicaViewModel visitaTecnicaViewModel;
+
+    public static final int CAMERA_PERM_CODE = 101;
+    public static final int CAMERA_REQUEST_CODE = 102;
+    private String currentPhotoPath;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,6 +97,12 @@ public class FragmentVisitaTecnica_03 extends Fragment {
         if(visitaTecnicaViewModel.getOrientacaoTelhadoPosition().getValue() != null){
             rg_orientacao_telhado.check(rg_orientacao_telhado.getChildAt(visitaTecnicaViewModel.getOrientacaoTelhadoPosition().getValue()).getId());
         }
+
+        if(visitaTecnicaViewModel.getFotoOrientacaoTelhado().getValue() != null){
+            foto_orientacao_telhado.setBackground(null);
+            foto_orientacao_telhado.setPadding(0, 0, 0, 0);
+            foto_orientacao_telhado.setImageBitmap(visitaTecnicaViewModel.getFotoOrientacaoTelhado().getValue());
+        }
     }
 
     private void radioGroupController(View view) {
@@ -109,9 +137,98 @@ public class FragmentVisitaTecnica_03 extends Fragment {
     private void onClickController() {
         btn_voltar.setOnClickListener(v -> getActivity().onBackPressed());
 
-        btn_avancar.setOnClickListener(v ->
-                Navigation.findNavController(v)
-                        .navigate(R.id.action_fragmentVisitaTecnica_03_to_fragmentVisitaTecnica_04));
+        btn_avancar.setOnClickListener(this::validarDados);
+
+        foto_orientacao_telhado.setOnClickListener(v -> cameraPermissao(CAMERA_REQUEST_CODE));
+    }
+
+    private void validarDados(View view) {
+        boolean valido = true;
+
+        if(visitaTecnicaViewModel.getMaterialEstruturaTelhado().getValue() == null){
+            Toast.makeText(requireActivity(), "Selecione o material da estrutura", Toast.LENGTH_SHORT).show();
+            valido = false;
+        } else if(visitaTecnicaViewModel.getOrientacaoTelhado().getValue() == null){
+            Toast.makeText(requireActivity(), "Selecione a orientação do telhado", Toast.LENGTH_SHORT).show();
+            valido = false;
+        }
+
+        if(valido)
+        {
+            Navigation.findNavController(view)
+                    .navigate(R.id.action_fragmentVisitaTecnica_03_to_fragmentVisitaTecnica_04);
+        }
+    }
+
+    private void cameraPermissao(int REQUEST_CODE) {
+        if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(requireActivity(), new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+        } else {
+            if(REQUEST_CODE == 102) {
+                dispatchTakePictureIntent();
+            }
+        }
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(requireActivity(),
+                        BuildConfig.APPLICATION_ID + ".provider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CAMERA_REQUEST_CODE) {
+                File fileCam = new File(currentPhotoPath);
+                foto_orientacao_telhado.setBackground(null);
+                foto_orientacao_telhado.setPadding(0, 0, 0, 0);
+                foto_orientacao_telhado.setImageURI(Uri.fromFile(fileCam));
+
+                Bitmap fotoCamera = BitmapFactory.decodeFile(currentPhotoPath);
+                visitaTecnicaViewModel.setFotoOrientacaoTelhado(fotoCamera);
+
+                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                Uri contentUri = Uri.fromFile(fileCam);
+                mediaScanIntent.setData(contentUri);
+                requireActivity().sendBroadcast(mediaScanIntent);
+                currentPhotoPath = "";
+            }
+        }
     }
 
     private void inicializarComponentes(View view) {
@@ -120,6 +237,7 @@ public class FragmentVisitaTecnica_03 extends Fragment {
         rg_material_estrutura = view.findViewById(R.id.rg_material_estrutura);
         rg_condicao_telhado = view.findViewById(R.id.rg_condicao_telhado);
         rg_orientacao_telhado = view.findViewById(R.id.rg_orientacao_telhado);
+        foto_orientacao_telhado = view.findViewById(R.id.foto_orientacao_telhado);
     }
 
 }

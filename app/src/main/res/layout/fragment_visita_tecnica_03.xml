@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Material da estrutura do telhado"
+                android:text="Material da estrutura do telhado*"
                 android:textStyle="bold" />
 
             <RadioGroup
@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Orientação do telhado"
+                android:text="Orientação do telhado*"
                 android:textStyle="bold" />
 
             <RadioGroup

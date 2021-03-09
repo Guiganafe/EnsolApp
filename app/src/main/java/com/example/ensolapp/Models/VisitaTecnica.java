@@ -8,7 +8,7 @@ public class VisitaTecnica {
     private Date dataVisita;
     private Map<String, Object> cliente;
     private String padraoEntrada;
-    private String aperagemDisjuntosEntrada;
+    private String amperagemDisjuntosEntrada;
     private String condicaoPadraoEntrada;
     private String localInstalacaoModulos;
     private String materialEstruturaTelhado;
@@ -41,12 +41,12 @@ public class VisitaTecnica {
         this.padraoEntrada = padraoEntrada;
     }
 
-    public String getAperagemDisjuntosEntrada() {
-        return aperagemDisjuntosEntrada;
+    public String getAmperagemDisjuntosEntrada() {
+        return amperagemDisjuntosEntrada;
     }
 
-    public void setAperagemDisjuntosEntrada(String aperagemDisjuntosEntrada) {
-        this.aperagemDisjuntosEntrada = aperagemDisjuntosEntrada;
+    public void setAmperagemDisjuntosEntrada(String aperagemDisjuntosEntrada) {
+        this.amperagemDisjuntosEntrada = aperagemDisjuntosEntrada;
     }
 
     public String getCondicaoPadraoEntrada() {
@@ -157,22 +157,45 @@ public class VisitaTecnica {
 
         Map<String, Object> vt = new HashMap<>();
 
+        //Campos obrigatórios
         vt.put("dataVisita", getDataVisita());
         vt.put("cliente", getCliente());
         vt.put("padraoEntrada", getPadraoEntrada());
-        vt.put("aperagemDisjuntosEntrada", getAperagemDisjuntosEntrada());
-        vt.put("condicaoPadraoEntrada", getCondicaoPadraoEntrada());
         vt.put("localInstalacaoModulos", getLocalInstalacaoModulos());
         vt.put("materialEstruturaTelhado", getMaterialEstruturaTelhado());
-        vt.put("condicaoTelhado", getCondicaoTelhado());
         vt.put("orientacaoTelhado", getOrientacaoTelhado());
-        vt.put("larguraTelhado", getLarguraTelhado());
-        vt.put("comprimentoTelhado", getComprimentoTelhado());
-        vt.put("alturaTelhado", getAlturaTelhado());
         vt.put("acessoEscada", getAcessoEscada());
         vt.put("acessoAndaime", getAcessoAndaime());
-        vt.put("obsFinais", getObsFinais());
         vt.put("tecnicoId", getTecnicoId());
+
+        //Campos não obrigatórios
+        if(!getAmperagemDisjuntosEntrada().isEmpty()){
+            vt.put("aperagemDisjuntosEntrada", getAmperagemDisjuntosEntrada());
+        }
+
+        if(!getCondicaoPadraoEntrada().isEmpty()){
+            vt.put("condicaoPadraoEntrada", getCondicaoPadraoEntrada());
+        }
+
+        if(!getCondicaoTelhado().isEmpty()){
+            vt.put("condicaoTelhado", getCondicaoTelhado());
+        }
+
+        if(!getLarguraTelhado().isEmpty()){
+            vt.put("larguraTelhado", getLarguraTelhado());
+        }
+
+        if(!getComprimentoTelhado().isEmpty()){
+            vt.put("comprimentoTelhado", getComprimentoTelhado());
+        }
+
+        if(!getAlturaTelhado().isEmpty()){
+            vt.put("alturaTelhado", getAlturaTelhado());
+        }
+
+        if(!getObsFinais().isEmpty()){
+            vt.put("obsFinais", getObsFinais());
+        }
 
         return vt;
     }

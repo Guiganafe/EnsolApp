@@ -79,13 +79,18 @@ public class FragmentVisitaTecnica_01 extends Fragment {
     }
 
     private void loadViewModelController() {
-        String nome_cliente = clienteViewModel.getNomeCliente().getValue(),
+        String data = visitaTecnicaViewModel.getDataVisita().getValue(),
+                nome_cliente = clienteViewModel.getNomeCliente().getValue(),
                 razao_social = clienteViewModel.getRazaoSocial().getValue(),
                 responsavel = clienteViewModel.getResponsavel().getValue(),
                 telefone = clienteViewModel.getTelefone().getValue(),
                 cpf_cnpj = clienteViewModel.getCpf_cnpj().getValue(),
                 email = clienteViewModel.getEmail().getValue(),
                 endereco = clienteViewModel.getEndereco().getValue();
+
+        if(!TextUtils.isEmpty(data)){
+            edt_data.getEditText().setText(data);
+        }
 
         if (!TextUtils.isEmpty(nome_cliente)){
             edt_nome.getEditText().setText(nome_cliente);
@@ -265,7 +270,25 @@ public class FragmentVisitaTecnica_01 extends Fragment {
     private void validarDados(View view) {
         boolean valido = true;
 
+        if(visitaTecnicaViewModel.getDataVisita().getValue() == null){
+            edt_data.setError("Insira a data");
+            valido = false;
+        } else if(clienteViewModel.getNomeCliente().getValue() == null){
+            edt_nome.setError("Insira o nome do cliente");
+            valido = false;
+        } else if(clienteViewModel.getTelefone().getValue() == null){
+            edt_telefone.setError("Insira um número válido");
+            valido = false;
+        } else if(clienteViewModel.getEndereco().getValue() == null){
+            edt_endereco.setError("Insira um endereço");
+            valido = false;
+        }
+
         if (valido){
+            edt_data.setError(null);
+            edt_nome.setError(null);
+            edt_telefone.setError(null);
+            edt_endereco.setError(null);
             Navigation.findNavController(view)
                     .navigate(R.id.action_fragmentVisitaTecnica_01_to_fragmentVisitaTecnica_02);
         }

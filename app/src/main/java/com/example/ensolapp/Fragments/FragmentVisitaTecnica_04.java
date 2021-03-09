@@ -3,10 +3,14 @@ package com.example.ensolapp.Fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -25,8 +30,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.ensolapp.BuildConfig;
 import com.example.ensolapp.Firebase.FirebaseService;
 import com.example.ensolapp.Models.Cliente;
 import com.example.ensolapp.Models.VisitaTecnica;
@@ -49,9 +56,14 @@ public class FragmentVisitaTecnica_04 extends Fragment {
     private TextInputLayout edt_largura_telhado, edt_comprimento_telhado, edt_altura_telhado,
             edt_acesso_escada, edt_acesso_andaime, edt_obs_finais;
     private ClienteViewModel clienteViewModel;
+    private ImageView foto_acesso_telhado;
     private VisitaTecnicaViewModel visitaTecnicaViewModel;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    public static final int CAMERA_PERM_CODE = 101;
+    public static final int CAMERA_REQUEST_CODE = 102;
+    private String currentPhotoPath;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,6 +119,12 @@ public class FragmentVisitaTecnica_04 extends Fragment {
 
         if (!TextUtils.isEmpty(obs_finais)){
             edt_obs_finais.getEditText().setText(obs_finais);
+        }
+
+        if(visitaTecnicaViewModel.getFotoAcessoTelhado().getValue() != null){
+            foto_acesso_telhado.setBackground(null);
+            foto_acesso_telhado.setPadding(0, 0, 0, 0);
+            foto_acesso_telhado.setImageBitmap(visitaTecnicaViewModel.getFotoAcessoTelhado().getValue());
         }
     }
 
@@ -217,15 +235,106 @@ public class FragmentVisitaTecnica_04 extends Fragment {
     private void onClickController() {
         btn_voltar.setOnClickListener(v -> getActivity().onBackPressed());
 
-        btn_finalizar.setOnClickListener(v -> {
-            try {
-                salvar();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        });
+        btn_finalizar.setOnClickListener(this::validarDados);
 
         btn_baixar_pdf.setOnClickListener(v -> baixarPermissao());
+
+        foto_acesso_telhado.setOnClickListener(v -> cameraPermissao(CAMERA_REQUEST_CODE));
+    }
+
+    private void validarDados(View v) {
+        boolean valido = true;
+
+        if(visitaTecnicaViewModel.getAcessoEscada().getValue() == null){
+            edt_acesso_escada.setError("Insira um valor válido");
+            valido = false;
+        }
+
+        if(visitaTecnicaViewModel.getAcessoAndaime().getValue() == null){
+            edt_acesso_andaime.setError("Insira um valor válido");
+            valido = false;
+        }
+
+        if(valido){
+            edt_acesso_escada.setError(null);
+            edt_acesso_andaime.setError(null);
+            try {
+                salvar();
+            } catch (ParseException pe){
+                pe.printStackTrace();
+            }
+        }
+    }
+
+    private void cameraPermissao(int REQUEST_CODE) {
+        if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(requireActivity(), new String[] {Manifest.permission.CAMERA}, CAMERA_PERM_CODE);
+        } else {
+            if(REQUEST_CODE == 102) {
+                dispatchTakePictureIntent();
+            }
+        }
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(requireActivity(),
+                        BuildConfig.APPLICATION_ID + ".provider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
+            }
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        //File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CAMERA_REQUEST_CODE) {
+                File fileCam = new File(currentPhotoPath);
+                foto_acesso_telhado.setBackground(null);
+                foto_acesso_telhado.setPadding(0, 0, 0, 0);
+                foto_acesso_telhado.setImageURI(Uri.fromFile(fileCam));
+
+                Bitmap fotoCamera = BitmapFactory.decodeFile(currentPhotoPath);
+                visitaTecnicaViewModel.setFotoAcessoTelhado(fotoCamera);
+
+                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                Uri contentUri = Uri.fromFile(fileCam);
+                mediaScanIntent.setData(contentUri);
+                requireActivity().sendBroadcast(mediaScanIntent);
+                currentPhotoPath = "";
+            }
+        }
     }
 
     private void baixarPermissao() {
@@ -267,51 +376,88 @@ public class FragmentVisitaTecnica_04 extends Fragment {
     }
 
     private void salvar() throws ParseException {
-        boolean valido = true;
 
         VisitaTecnica visitaTecnica = new VisitaTecnica();
         Cliente cliente = new Cliente();
 
-        cliente.setTipoCliente(clienteViewModel.getTipoCliente().getValue());
+        //Dados obrigatórios
         cliente.setNomeCliente(clienteViewModel.getNomeCliente().getValue());
-        cliente.setRazaoSocial(clienteViewModel.getRazaoSocial().getValue());
-        cliente.setResponsavel(clienteViewModel.getResponsavel().getValue());
         cliente.setTelefone(clienteViewModel.getTelefone().getValue());
-        cliente.setCpf_cnpj(clienteViewModel.getCpf_cnpj().getValue());
-        cliente.setEmail(clienteViewModel.getEmail().getValue());
         cliente.setEndereco(clienteViewModel.getEndereco().getValue());
+
+        //Dados não obrigatórios
+        if(clienteViewModel.getTipoCliente().getValue() != null){
+            cliente.setTipoCliente(clienteViewModel.getTipoCliente().getValue());
+        }
+
+        if(clienteViewModel.getRazaoSocial().getValue() != null){
+            cliente.setRazaoSocial(clienteViewModel.getRazaoSocial().getValue());
+        }
+
+        if(clienteViewModel.getResponsavel().getValue() != null){
+            cliente.setResponsavel(clienteViewModel.getResponsavel().getValue());
+        }
+
+        if(clienteViewModel.getCpf_cnpj().getValue() != null){
+            cliente.setCpf_cnpj(clienteViewModel.getCpf_cnpj().getValue());
+        }
+
+        if(clienteViewModel.getEmail().getValue() != null){
+            cliente.setEmail(clienteViewModel.getEmail().getValue());
+        }
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(visitaTecnicaViewModel.getDataVisita().getValue());
 
+        //Dados obrigatórios
         visitaTecnica.setDataVisita(data);
         visitaTecnica.setCliente(cliente.toMap());
         visitaTecnica.setPadraoEntrada(visitaTecnicaViewModel.getPadraoEntrada().getValue());
-        visitaTecnica.setAperagemDisjuntosEntrada(visitaTecnicaViewModel.getAperagemDisjuntosEntrada().getValue());
-        visitaTecnica.setCondicaoPadraoEntrada(visitaTecnicaViewModel.getCondicaoPadraoEntrada().getValue());
         visitaTecnica.setLocalInstalacaoModulos(visitaTecnicaViewModel.getLocalInstalacaoModulos().getValue());
         visitaTecnica.setMaterialEstruturaTelhado(visitaTecnicaViewModel.getMaterialEstruturaTelhado().getValue());
-        visitaTecnica.setCondicaoTelhado(visitaTecnicaViewModel.getCondicaoTelhado().getValue());
         visitaTecnica.setOrientacaoTelhado(visitaTecnicaViewModel.getOrientacaoTelhado().getValue());
-        visitaTecnica.setLarguraTelhado(visitaTecnicaViewModel.getLarguraTelhado().getValue());
-        visitaTecnica.setComprimentoTelhado(visitaTecnicaViewModel.getComprimentoTelhado().getValue());
-        visitaTecnica.setAlturaTelhado(visitaTecnicaViewModel.getAlturaTelhado().getValue());
         visitaTecnica.setAcessoEscada(visitaTecnicaViewModel.getAcessoEscada().getValue());
         visitaTecnica.setAcessoAndaime(visitaTecnicaViewModel.getAcessoAndaime().getValue());
-        visitaTecnica.setObsFinais(visitaTecnicaViewModel.getObsFinais().getValue());
         visitaTecnica.setTecnicoId(FirebaseService.getFirebaseUser().getUid());
 
-        if(valido){
-            db.collection("visitas_tecnicas")
-                    .add(visitaTecnica.toMap())
-                    .addOnSuccessListener(documentReference -> {
-
-                    })
-                    .addOnFailureListener(e -> {
-
-                    });
-            requireActivity().finish();
+        //Dados não obrigatórios
+        if(visitaTecnicaViewModel.getAperagemDisjuntosEntrada().getValue() != null){
+            visitaTecnica.setAmperagemDisjuntosEntrada(visitaTecnicaViewModel.getAperagemDisjuntosEntrada().getValue());
         }
+
+        if(visitaTecnicaViewModel.getCondicaoPadraoEntrada().getValue() != null){
+            visitaTecnica.setCondicaoPadraoEntrada(visitaTecnicaViewModel.getCondicaoPadraoEntrada().getValue());
+        }
+
+        if(visitaTecnicaViewModel.getCondicaoTelhado().getValue() != null){
+            visitaTecnica.setCondicaoTelhado(visitaTecnicaViewModel.getCondicaoTelhado().getValue());
+        }
+
+        if(visitaTecnicaViewModel.getLarguraTelhado().getValue() != null){
+            visitaTecnica.setLarguraTelhado(visitaTecnicaViewModel.getLarguraTelhado().getValue());
+        }
+
+        if(visitaTecnicaViewModel.getComprimentoTelhado().getValue() != null){
+            visitaTecnica.setComprimentoTelhado(visitaTecnicaViewModel.getComprimentoTelhado().getValue());
+        }
+
+        if(visitaTecnicaViewModel.getAlturaTelhado().getValue() != null){
+            visitaTecnica.setAlturaTelhado(visitaTecnicaViewModel.getAlturaTelhado().getValue());
+        }
+
+        if(visitaTecnicaViewModel.getObsFinais().getValue() != null){
+            visitaTecnica.setObsFinais(visitaTecnicaViewModel.getObsFinais().getValue());
+        }
+
+        db.collection("visitas_tecnicas")
+                .add(visitaTecnica.toMap())
+                .addOnSuccessListener(documentReference -> {
+
+                })
+                .addOnFailureListener(e -> {
+
+                });
+        requireActivity().finish();
     }
 
     private void inicializarComponentes(View view) {
@@ -324,5 +470,6 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         edt_acesso_escada = view.findViewById(R.id.edt_vt_acesso_escada);
         edt_acesso_andaime = view.findViewById(R.id.edt_vt_acesso_andaime);
         edt_obs_finais = view.findViewById(R.id.edt_vt_obs_finais);
+        foto_acesso_telhado = view.findViewById(R.id.foto_acesso_telhado);
     }
 }
