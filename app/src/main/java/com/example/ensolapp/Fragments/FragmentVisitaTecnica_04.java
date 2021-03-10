@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -38,17 +37,26 @@ import com.example.ensolapp.Firebase.FirebaseService;
 import com.example.ensolapp.Models.Cliente;
 import com.example.ensolapp.Models.VisitaTecnica;
 import com.example.ensolapp.R;
+import com.example.ensolapp.Utils.GerarPDF;
 import com.example.ensolapp.ViewModels.ClienteViewModel;
 import com.example.ensolapp.ViewModels.VisitaTecnicaViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class FragmentVisitaTecnica_04 extends Fragment {
 
@@ -237,8 +245,6 @@ public class FragmentVisitaTecnica_04 extends Fragment {
 
         btn_finalizar.setOnClickListener(this::validarDados);
 
-        btn_baixar_pdf.setOnClickListener(v -> baixarPermissao());
-
         foto_acesso_telhado.setOnClickListener(v -> cameraPermissao(CAMERA_REQUEST_CODE));
     }
 
@@ -337,43 +343,19 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         }
     }
 
-    private void baixarPermissao() {
-        if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+    private void baixarPermissao(VisitaTecnica visitaTecnica) {
+        if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(requireActivity(), new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
         } else {
-            gerarPDF();
+            try{
+                GerarPDF.gerarPDF(requireActivity(), visitaTecnica);
+            }catch (FileNotFoundException fe){
+                fe.printStackTrace();
+            }
         }
     }
 
-    private void gerarPDF() {
-        PdfDocument pdfDocument = new PdfDocument();
-        Paint paint = new Paint();
 
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(250, 400, 1).create();
-        PdfDocument.Page page = pdfDocument.startPage(pageInfo);
-
-        Canvas canvas = page.getCanvas();
-
-        canvas.drawText("Hello ensol app", 40, 50, paint);
-
-        pdfDocument.finishPage(page);
-
-        ContextWrapper cw = new ContextWrapper(requireActivity().getApplicationContext());
-        File directory = cw.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
-
-        File file = new File(directory, "ensol" + ".pdf");
-
-        try {
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            pdfDocument.writeTo(fileOutputStream);
-            Toast.makeText(requireActivity(), "PDF baixado com sucesso", Toast.LENGTH_SHORT).show();
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-        pdfDocument.close();
-
-    }
 
     private void salvar() throws ParseException {
 
@@ -408,6 +390,9 @@ public class FragmentVisitaTecnica_04 extends Fragment {
 
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date data = formato.parse(visitaTecnicaViewModel.getDataVisita().getValue());
+        Calendar dataDoDia = Calendar.getInstance(Locale.getDefault());
+        data.setHours(dataDoDia.getTime().getHours());
+        data.setMinutes(dataDoDia.getTime().getMinutes());
 
         //Dados obrigatórios
         visitaTecnica.setDataVisita(data);
@@ -457,6 +442,7 @@ public class FragmentVisitaTecnica_04 extends Fragment {
                 .addOnFailureListener(e -> {
 
                 });
+        baixarPermissao(visitaTecnica);
         requireActivity().finish();
     }
 

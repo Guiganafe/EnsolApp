@@ -100,23 +100,23 @@ public class Cliente {
         cliente.put("endereco", getEndereco());
 
         //Campos não obrigatórios
-        if(!getTipoCliente().isEmpty()){
+        if(getTipoCliente() != null){
             cliente.put("tipoCliente", getTipoCliente());
         }
 
-        if(!getRazaoSocial().isEmpty()){
+        if(getRazaoSocial() != null){
             cliente.put("razaoSocial", getRazaoSocial());
         }
 
-        if(!getResponsavel().isEmpty()){
+        if(getResponsavel() != null){
             cliente.put("responsavel", getResponsavel());
         }
 
-        if(!getCpf_cnpj().isEmpty()){
+        if(getCpf_cnpj() != null){
             cliente.put("cpf_cnpj", getCpf_cnpj());
         }
 
-        if(!getEmail().isEmpty()){
+        if(getEmail() != null){
             cliente.put("email", getEmail());
         }
 

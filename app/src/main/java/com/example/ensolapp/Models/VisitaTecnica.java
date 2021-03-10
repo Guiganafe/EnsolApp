@@ -169,31 +169,31 @@ public class VisitaTecnica {
         vt.put("tecnicoId", getTecnicoId());
 
         //Campos não obrigatórios
-        if(!getAmperagemDisjuntosEntrada().isEmpty()){
+        if(getAmperagemDisjuntosEntrada() != null){
             vt.put("aperagemDisjuntosEntrada", getAmperagemDisjuntosEntrada());
         }
 
-        if(!getCondicaoPadraoEntrada().isEmpty()){
+        if(getCondicaoPadraoEntrada() != null){
             vt.put("condicaoPadraoEntrada", getCondicaoPadraoEntrada());
         }
 
-        if(!getCondicaoTelhado().isEmpty()){
+        if(getCondicaoTelhado() != null){
             vt.put("condicaoTelhado", getCondicaoTelhado());
         }
 
-        if(!getLarguraTelhado().isEmpty()){
+        if(getLarguraTelhado() != null){
             vt.put("larguraTelhado", getLarguraTelhado());
         }
 
-        if(!getComprimentoTelhado().isEmpty()){
+        if(getComprimentoTelhado() != null){
             vt.put("comprimentoTelhado", getComprimentoTelhado());
         }
 
-        if(!getAlturaTelhado().isEmpty()){
+        if(getAlturaTelhado() != null){
             vt.put("alturaTelhado", getAlturaTelhado());
         }
 
-        if(!getObsFinais().isEmpty()){
+        if(getObsFinais() != null){
             vt.put("obsFinais", getObsFinais());
         }
 

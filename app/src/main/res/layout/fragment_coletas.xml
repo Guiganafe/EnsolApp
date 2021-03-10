@@ -43,8 +43,17 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/visitas_tecnicas_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"/>
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/sem_visitas"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="visible"
+                    android:gravity="center"
+                    android:text="Você não realizou nenhuma visita hoje"/>
 
         </LinearLayout>
 
