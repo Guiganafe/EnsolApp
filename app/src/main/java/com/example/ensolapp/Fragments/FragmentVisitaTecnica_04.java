@@ -35,6 +35,7 @@ import android.widget.Toast;
 import com.example.ensolapp.BuildConfig;
 import com.example.ensolapp.Firebase.FirebaseService;
 import com.example.ensolapp.Models.Cliente;
+import com.example.ensolapp.Models.Fotos;
 import com.example.ensolapp.Models.VisitaTecnica;
 import com.example.ensolapp.R;
 import com.example.ensolapp.Utils.GerarPDF;
@@ -60,7 +61,7 @@ import java.util.Locale;
 
 public class FragmentVisitaTecnica_04 extends Fragment {
 
-    private Button btn_voltar, btn_finalizar, btn_baixar_pdf;
+    private Button btn_voltar, btn_finalizar;
     private TextInputLayout edt_largura_telhado, edt_comprimento_telhado, edt_altura_telhado,
             edt_acesso_escada, edt_acesso_andaime, edt_obs_finais;
     private ClienteViewModel clienteViewModel;
@@ -343,12 +344,12 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         }
     }
 
-    private void baixarPermissao(VisitaTecnica visitaTecnica) {
+    private void baixarPermissao(VisitaTecnica visitaTecnica, Fotos fotos) {
         if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(requireActivity(), new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
         } else {
             try{
-                GerarPDF.gerarPDF(requireActivity(), visitaTecnica);
+                GerarPDF.gerarPDF(requireActivity(), visitaTecnica, fotos);
             }catch (FileNotFoundException fe){
                 fe.printStackTrace();
             }
@@ -434,6 +435,20 @@ public class FragmentVisitaTecnica_04 extends Fragment {
             visitaTecnica.setObsFinais(visitaTecnicaViewModel.getObsFinais().getValue());
         }
 
+        Fotos fotos = new Fotos();
+
+        if(visitaTecnicaViewModel.getFotoPadraoEntrada().getValue() != null){
+            fotos.setFoto_padrao(visitaTecnicaViewModel.getFotoPadraoEntrada().getValue());
+        }
+
+        if(visitaTecnicaViewModel.getFotoAcessoTelhado().getValue() != null){
+            fotos.setFoto_acesso_telhado(visitaTecnicaViewModel.getFotoAcessoTelhado().getValue());
+        }
+
+        if(visitaTecnicaViewModel.getFotoOrientacaoTelhado().getValue() != null){
+            fotos.setFoto_orientacao_telhado(visitaTecnicaViewModel.getFotoOrientacaoTelhado().getValue());
+        }
+
         db.collection("visitas_tecnicas")
                 .add(visitaTecnica.toMap())
                 .addOnSuccessListener(documentReference -> {
@@ -442,14 +457,13 @@ public class FragmentVisitaTecnica_04 extends Fragment {
                 .addOnFailureListener(e -> {
 
                 });
-        baixarPermissao(visitaTecnica);
+        baixarPermissao(visitaTecnica, fotos);
         requireActivity().finish();
     }
 
     private void inicializarComponentes(View view) {
         btn_voltar = view.findViewById(R.id.btn_vs_voltar_passo_2);
         btn_finalizar = view.findViewById(R.id.btn_finalizar);
-        btn_baixar_pdf = view.findViewById(R.id.btn_baixar_pdf);
         edt_largura_telhado = view.findViewById(R.id.edt_vt_largura_telhado);
         edt_comprimento_telhado = view.findViewById(R.id.edt_vt_comprimento_telhado);
         edt_altura_telhado = view.findViewById(R.id.edt_vt_altura_telhado);

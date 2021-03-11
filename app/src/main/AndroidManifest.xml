@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ensolapp">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EnsolApp">
+        <activity android:name=".Activity.VisualizarVisita"></activity>
         <activity android:name=".Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,8 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.VisitaTecnicaActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".Activity.VisitaTecnicaActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.MainActivity" />
 
@@ -32,9 +34,8 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
-
     </application>
 
 </manifest>

@@ -2,8 +2,10 @@ package com.example.ensolapp.Base;
 
 import com.example.ensolapp.Firebase.FirebaseService;
 import com.example.ensolapp.Models.VisitaTecnica;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -12,7 +14,7 @@ public class VisitaTecnicaBase {
        Acesso aos dados do firebase
     */
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private String userID = FirebaseService.getFirebaseAuth().getCurrentUser().getUid();
+    private String tecnicoId = FirebaseService.getFirebaseAuth().getCurrentUser().getUid();
 
     /*
        Estrutura de dados utilizada
@@ -26,6 +28,17 @@ public class VisitaTecnicaBase {
     private static VisitaTecnicaBase mVisitaTecnicaBase;
 
     private VisitaTecnicaBase (){
+        db.collection("visitas_tecnicas").whereEqualTo("tecnicoId", tecnicoId).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            if(queryDocumentSnapshots != null){
+                visitaTecnica = null;
+                visitaTecnica = new ArrayList<>();
+                for (DocumentSnapshot document: queryDocumentSnapshots.getDocuments()) {
+                    visitaTecnica.add(document.toObject(VisitaTecnica.class));
+                    visitaTecnicaId.add(document.getId());
+                }
+            }
+        });
+
         firebaseListenner();
     }
 
@@ -33,7 +46,7 @@ public class VisitaTecnicaBase {
         Escuta por atualizações na base de dados
      */
     private void firebaseListenner() {
-        db.collection("visitas_tecnicas").whereEqualTo("tecnicoId", userID).addSnapshotListener((value, error) -> {
+        db.collection("visitas_tecnicas").whereEqualTo("tecnicoId", tecnicoId).addSnapshotListener((value, error) -> {
             if (value != null) {
                 visitaTecnica = null;
                 visitaTecnica = new ArrayList<>();

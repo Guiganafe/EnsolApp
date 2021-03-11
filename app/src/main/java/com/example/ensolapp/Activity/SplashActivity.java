@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.example.ensolapp.Base.VisitaTecnicaBase;
 import com.example.ensolapp.Firebase.FirebaseService;
 import com.example.ensolapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         if(firebaseUser != null){
-
+            VisitaTecnicaBase.getInstance();
         }
 
         Handler hander = new Handler();

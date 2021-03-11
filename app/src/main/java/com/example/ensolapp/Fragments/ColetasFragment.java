@@ -88,7 +88,7 @@ public class ColetasFragment extends Fragment implements VisitaTecnicaAdapter.on
                     mesColeta = month;
                     anoColeta = year;
                     tv_dia_selecionado.setText(String.format(Locale.getDefault(),"%02d/%02d/%04d", dayOfMonth, month+1, year));
-                    carregarAgendaDoDia(diaColeta, mesColeta, anoColeta);
+                    carregarAgendaDoDia(diaColeta, mesColeta+1, anoColeta);
                 }
             },ano, mes, dia);
             datePickerDialog.show();
@@ -96,6 +96,7 @@ public class ColetasFragment extends Fragment implements VisitaTecnicaAdapter.on
     }
 
     public void carregarAgendaDoDia(int dia, int mes, int ano){
+        Toast.makeText(requireActivity(), "Data que chegou: " + dia + "/" + mes + "/" + ano, Toast.LENGTH_SHORT).show();
         final Calendar dataDoDia = Calendar.getInstance(Locale.getDefault()), dataDiaSeguinte = Calendar.getInstance(Locale.getDefault());
         dataDoDia.set(ano, mes-1, dia, 0, 0, 0);
         dataDiaSeguinte.set(ano, mes-1, dia, 23 ,59, 59);

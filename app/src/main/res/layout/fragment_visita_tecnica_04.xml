@@ -206,15 +206,6 @@
             android:text="Voltar" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_baixar_pdf"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:layout_marginStart="5dp"
-            android:backgroundTint="@color/gray"
-            android:text="Baixar" />
-
-        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_finalizar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
