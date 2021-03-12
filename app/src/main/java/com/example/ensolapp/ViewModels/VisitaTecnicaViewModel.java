@@ -34,6 +34,9 @@ public class VisitaTecnicaViewModel extends ViewModel {
     private MutableLiveData<Bitmap> fotoPadraoEntrada = new MutableLiveData<>();
     private MutableLiveData<Bitmap> fotoOrientacaoTelhado = new MutableLiveData<>();
     private MutableLiveData<Bitmap> fotoAcessoTelhado = new MutableLiveData<>();
+    private MutableLiveData<String> fotoPadraoEntradaUrl = new MutableLiveData<>();
+    private MutableLiveData<String> fotoOrientacaoTelhadoUrl = new MutableLiveData<>();
+    private MutableLiveData<String> fotoAcessoTelhadoUrl = new MutableLiveData<>();
 
     public LiveData<String> getDataVisita() {
         return dataVisita;
@@ -217,5 +220,29 @@ public class VisitaTecnicaViewModel extends ViewModel {
 
     public void setFotoAcessoTelhado(Bitmap fotoAcessoTelhado) {
         this.fotoAcessoTelhado.setValue(fotoAcessoTelhado);
+    }
+
+    public LiveData<String> getFotoPadraoEntradaUrl() {
+        return fotoPadraoEntradaUrl;
+    }
+
+    public void setFotoPadraoEntradaUrl(String fotoPadraoEntradaUrl) {
+        this.fotoPadraoEntradaUrl.setValue(fotoPadraoEntradaUrl);
+    }
+
+    public LiveData<String> getFotoOrientacaoTelhadoUrl() {
+        return fotoOrientacaoTelhadoUrl;
+    }
+
+    public void setFotoOrientacaoTelhadoUrl(String fotoOrientacaoTelhadoUrl) {
+        this.fotoOrientacaoTelhadoUrl.setValue(fotoOrientacaoTelhadoUrl);
+    }
+
+    public LiveData<String> getFotoAcessoTelhadoUrl() {
+        return fotoAcessoTelhadoUrl;
+    }
+
+    public void setFotoAcessoTelhadoUrl(String fotoAcessoTelhadoUrl) {
+        this.fotoAcessoTelhadoUrl.setValue(fotoAcessoTelhadoUrl);
     }
 }

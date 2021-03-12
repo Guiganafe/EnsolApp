@@ -1,9 +1,638 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.VisualizarVisita">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:text="Visualizar Visita Técnica"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"/>
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/textView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layout_data_visita"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Data da visita: "/>
+
+                    <TextView
+                        android:id="@+id/data_visita_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="12/02/2021"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_tipo_cliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Tipo de cliente: "/>
+
+                    <TextView
+                        android:id="@+id/tipo_cliente_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Jurídico"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_nome_cliente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textStyle="bold"
+                        android:text="Nome cliente: "/>
+
+                    <TextView
+                        android:id="@+id/nome_cliente_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Guilherme"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_razao_social"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textStyle="bold"
+                        android:text="Razão social: "/>
+
+                    <TextView
+                        android:id="@+id/razao_social_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="LDTA"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_responsavel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textStyle="bold"
+                        android:text="Responsável: "/>
+
+                    <TextView
+                        android:id="@+id/responsavel_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Eu"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_telefone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Telefone: "/>
+
+                    <TextView
+                        android:id="@+id/telefone_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="(67) 99999-9999"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_cpf_cnpj"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="CPF/CNPJ: "/>
+
+                    <TextView
+                        android:id="@+id/cpf_cnpj_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="123.456.789-10"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textStyle="bold"
+                        android:text="E-mail: "/>
+
+                    <TextView
+                        android:id="@+id/email_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="email@email.com"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_endereco"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textStyle="bold"
+                        android:text="Endereço: "/>
+
+                    <TextView
+                        android:id="@+id/endereco_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Rua sem saída"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_padrao_entrada"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Padrão de entrada: "/>
+
+                    <TextView
+                        android:id="@+id/padrao_entrada_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Monofásico"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/foto_padrao_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="Foto do padrão"/>
+
+                <ImageView
+                    android:id="@+id/foto_padrao_entrada_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto padrão" />
+
+                <LinearLayout
+                    android:id="@+id/layout_amperagem_disjuntor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Amperagem do disjuntor: "/>
+
+                    <TextView
+                        android:id="@+id/amperagem_disjuntor_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="125 Amp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_condicao_padrao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Condição do padrão: "/>
+
+                    <TextView
+                        android:id="@+id/condicao_padrao_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Boa"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_local_instalacao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Local de instalação: "/>
+
+                    <TextView
+                        android:id="@+id/local_instalacao_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Solo"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_material_telhado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Material do telhado: "/>
+
+                    <TextView
+                        android:id="@+id/material_telhado_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Madeira"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_condicao_telhado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Condição do telhado: "/>
+
+                    <TextView
+                        android:id="@+id/condicao_telhado_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Boa"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_orientacao_telhado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Orientação do telhado: "/>
+
+                    <TextView
+                        android:id="@+id/orientacao_telhado_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Norte"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/foto_orientacao_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="Foto da orientação do telhado:"/>
+
+                <ImageView
+                    android:id="@+id/foto_orientacao_telhado_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto padrão" />
+
+                <LinearLayout
+                    android:id="@+id/layout_largura_telhado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Largura do telhado: "/>
+
+                    <TextView
+                        android:id="@+id/largura_telhado_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="12 metros"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_comprimento_telhado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Comprimento do telhado: "/>
+
+                    <TextView
+                        android:id="@+id/largura_comprimento_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="9 metros"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_altura_telhado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Altura do telhado: "/>
+
+                    <TextView
+                        android:id="@+id/altura_telhado_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="2 metros"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="Acesso ao telhado:"/>
+
+
+                <LinearLayout
+                    android:id="@+id/layout_escada_acesso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Escada (até 5 metros): "/>
+
+                    <TextView
+                        android:id="@+id/escada_acesso_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="3 metros"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_andaime_acesso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Andaime (acima de 5 metros): "/>
+
+                    <TextView
+                        android:id="@+id/andaime_acesso_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="7 metros"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/foto_acesso_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Foto de acesso ao telhado"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/foto_acesso_telhado_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto padrão" />
+
+                <TextView
+                    android:id="@+id/obs_finais_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Observações finais"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/obs_finais_vizualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Eu gostei da visita"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_download_form"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:tint="@color/white"
+        android:src="@drawable/ic_download"
+        android:backgroundTint="@color/yellow"
+        app:borderWidth="0dp"
+        android:contentDescription="Baixar formulário"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

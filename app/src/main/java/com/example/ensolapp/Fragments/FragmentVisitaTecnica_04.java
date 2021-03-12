@@ -352,6 +352,8 @@ public class FragmentVisitaTecnica_04 extends Fragment {
                 GerarPDF.gerarPDF(requireActivity(), visitaTecnica, fotos);
             }catch (FileNotFoundException fe){
                 fe.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

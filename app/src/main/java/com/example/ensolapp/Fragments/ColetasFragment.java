@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ensolapp.Activity.VisitaTecnicaActivity;
+import com.example.ensolapp.Activity.VisualizarVisita;
 import com.example.ensolapp.Adapters.VisitaTecnicaAdapter;
 import com.example.ensolapp.Base.VisitaTecnicaBase;
 import com.example.ensolapp.Models.VisitaTecnica;
@@ -152,7 +153,9 @@ public class ColetasFragment extends Fragment implements VisitaTecnicaAdapter.on
 
     @Override
     public void onVisitaTecnicaItemClick(int position) {
-        Toast.makeText(requireActivity(), "Opa!", Toast.LENGTH_SHORT).show();
+        Intent visualizarVisita = new Intent(requireActivity(), VisualizarVisita.class);
+        visualizarVisita.putExtra("position", position);
+        startActivity(visualizarVisita);
     }
 
     private void inicializarComponentes(View view) {

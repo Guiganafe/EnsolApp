@@ -21,6 +21,9 @@ public class VisitaTecnica {
     private String acessoAndaime;
     private String obsFinais;
     private String tecnicoId;
+    private String foto_padrao;
+    private String foto_orientacao_telhado;
+    private String foto_acesso_telhado;
 
     public VisitaTecnica() {
     }
@@ -153,6 +156,30 @@ public class VisitaTecnica {
         this.tecnicoId = tecnicoId;
     }
 
+    public String getFoto_padrao() {
+        return foto_padrao;
+    }
+
+    public void setFoto_padrao(String foto_padrao) {
+        this.foto_padrao = foto_padrao;
+    }
+
+    public String getFoto_orientacao_telhado() {
+        return foto_orientacao_telhado;
+    }
+
+    public void setFoto_orientacao_telhado(String foto_orientacao_telhado) {
+        this.foto_orientacao_telhado = foto_orientacao_telhado;
+    }
+
+    public String getFoto_acesso_telhado() {
+        return foto_acesso_telhado;
+    }
+
+    public void setFoto_acesso_telhado(String foto_acesso_telhado) {
+        this.foto_acesso_telhado = foto_acesso_telhado;
+    }
+
     public Map<String, Object> toMap(){
 
         Map<String, Object> vt = new HashMap<>();
@@ -195,6 +222,18 @@ public class VisitaTecnica {
 
         if(getObsFinais() != null){
             vt.put("obsFinais", getObsFinais());
+        }
+
+        if(getFoto_padrao() != null){
+            vt.put("fotoPadrao", getFoto_padrao());
+        }
+
+        if(getFoto_orientacao_telhado() != null){
+            vt.put("fotoOrientacaoTelhado", getFoto_orientacao_telhado());
+        }
+
+        if(getFoto_acesso_telhado() != null){
+            vt.put("fotoAcessoTelhado", getFoto_acesso_telhado());
         }
 
         return vt;
