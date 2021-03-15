@@ -39,12 +39,19 @@ import com.example.ensolapp.Models.VisitaTecnica;
 import com.example.ensolapp.R;
 import com.example.ensolapp.ViewModels.ClienteViewModel;
 import com.example.ensolapp.ViewModels.VisitaTecnicaViewModel;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -58,6 +65,8 @@ public class FragmentVisitaTecnica_03 extends Fragment {
     private RadioButton rb_checked;
     private ImageView foto_orientacao_telhado;
     private VisitaTecnicaViewModel visitaTecnicaViewModel;
+    private ClienteViewModel clienteViewModel;
+    private StorageReference storageRef;
 
     public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQUEST_CODE = 102;
@@ -67,6 +76,8 @@ public class FragmentVisitaTecnica_03 extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         visitaTecnicaViewModel = new ViewModelProvider(requireActivity()).get(VisitaTecnicaViewModel.class);
+        clienteViewModel = new ViewModelProvider(requireActivity()).get(ClienteViewModel.class);
+        storageRef = FirebaseStorage.getInstance().getReference();
     }
 
     @Override
@@ -155,6 +166,9 @@ public class FragmentVisitaTecnica_03 extends Fragment {
 
         if(valido)
         {
+            if(visitaTecnicaViewModel.getFotoOrientacaoTelhado().getValue() != null){
+                enviarDados();
+            }
             Navigation.findNavController(view)
                     .navigate(R.id.action_fragmentVisitaTecnica_03_to_fragmentVisitaTecnica_04);
         }
@@ -229,6 +243,33 @@ public class FragmentVisitaTecnica_03 extends Fragment {
                 currentPhotoPath = "";
             }
         }
+    }
+
+    private Task<String> enviarDados() {
+        final StorageReference ImageRef =
+                storageRef.child("fotos/fotos_orientacao_telhado/cliente_" + clienteViewModel.getNomeCliente().getValue() + ".jpg");
+        Bitmap bitmap = visitaTecnicaViewModel.getFotoOrientacaoTelhado().getValue();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = ImageRef.putBytes(data);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+            if (!task.isSuccessful()) {
+                throw task.getException();
+            }
+
+            // Continue with the task to get the download URL
+            return ImageRef.getDownloadUrl();
+        }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+            if (task.isSuccessful()) {
+                Uri downloadUri = task.getResult();
+                visitaTecnicaViewModel.setFotoOrientacaoTelhadoUrl(downloadUri.toString());
+            }
+        });
+        return null;
     }
 
     private void inicializarComponentes(View view) {

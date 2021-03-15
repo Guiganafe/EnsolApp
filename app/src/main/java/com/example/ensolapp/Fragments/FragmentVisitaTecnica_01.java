@@ -65,6 +65,7 @@ public class FragmentVisitaTecnica_01 extends Fragment {
         textWatcherController();
         loadViewModelController();
         radioGroupController(view);
+
     }
 
     private void radioGroupController(View view) {

@@ -41,13 +41,20 @@ import com.example.ensolapp.R;
 import com.example.ensolapp.Utils.GerarPDF;
 import com.example.ensolapp.ViewModels.ClienteViewModel;
 import com.example.ensolapp.ViewModels.VisitaTecnicaViewModel;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -69,6 +76,7 @@ public class FragmentVisitaTecnica_04 extends Fragment {
     private VisitaTecnicaViewModel visitaTecnicaViewModel;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private StorageReference storageRef;
 
     public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQUEST_CODE = 102;
@@ -79,6 +87,7 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         super.onCreate(savedInstanceState);
         clienteViewModel =  new ViewModelProvider(requireActivity()).get(ClienteViewModel.class);
         visitaTecnicaViewModel = new ViewModelProvider(requireActivity()).get(VisitaTecnicaViewModel.class);
+        storageRef = FirebaseStorage.getInstance().getReference();
     }
 
     @Override
@@ -88,6 +97,9 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         onClickController();
         textWatcherController();
         loadViewModelController();
+        if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(requireActivity(), new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+        }
     }
 
     @Override
@@ -262,6 +274,10 @@ public class FragmentVisitaTecnica_04 extends Fragment {
             valido = false;
         }
 
+        if(visitaTecnicaViewModel.getFotoAcessoTelhado().getValue() != null){
+            enviarDados();
+        }
+
         if(valido){
             edt_acesso_escada.setError(null);
             edt_acesso_andaime.setError(null);
@@ -358,8 +374,6 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         }
     }
 
-
-
     private void salvar() throws ParseException {
 
         VisitaTecnica visitaTecnica = new VisitaTecnica();
@@ -441,6 +455,7 @@ public class FragmentVisitaTecnica_04 extends Fragment {
 
         if(visitaTecnicaViewModel.getFotoPadraoEntrada().getValue() != null){
             fotos.setFoto_padrao(visitaTecnicaViewModel.getFotoPadraoEntrada().getValue());
+            visitaTecnica.setFotoPadrao(visitaTecnicaViewModel.getFotoPadraoEntradaUrl().getValue());
         }
 
         if(visitaTecnicaViewModel.getFotoAcessoTelhado().getValue() != null){
@@ -461,6 +476,33 @@ public class FragmentVisitaTecnica_04 extends Fragment {
                 });
         baixarPermissao(visitaTecnica, fotos);
         requireActivity().finish();
+    }
+
+    private Task<String> enviarDados() {
+        final StorageReference ImageRef =
+                storageRef.child("fotos/fotos_acesso_telhado/cliente_" + clienteViewModel.getNomeCliente().getValue() + ".jpg");
+        Bitmap bitmap = visitaTecnicaViewModel.getFotoAcessoTelhado().getValue();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = ImageRef.putBytes(data);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask((Continuation<UploadTask.TaskSnapshot, Task<Uri>>) task -> {
+            if (!task.isSuccessful()) {
+                throw task.getException();
+            }
+
+            // Continue with the task to get the download URL
+            return ImageRef.getDownloadUrl();
+        }).addOnCompleteListener((OnCompleteListener<Uri>) task -> {
+            if (task.isSuccessful()) {
+                Uri downloadUri = task.getResult();
+                visitaTecnicaViewModel.setFotoAcessoTelhadoUrl(downloadUri.toString());
+            }
+        });
+        return null;
     }
 
     private void inicializarComponentes(View view) {

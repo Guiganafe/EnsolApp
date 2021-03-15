@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.ensolapp.Base.VisitaTecnicaBase;
 import com.example.ensolapp.Models.Fotos;
 import com.example.ensolapp.Models.VisitaTecnica;
@@ -142,21 +143,23 @@ public class VisualizarVisita extends AppCompatActivity {
             obs_finais_textView.setVisibility(View.GONE);
         }
 
-        if(visitaTecnica.getFoto_padrao() != null){
-            //
+        if(visitaTecnica.getFotoPadrao() != null){
+            foto_padrao_entrada_visualizar.setBackground(null);
+            foto_padrao_entrada_visualizar.setPadding(0, 0, 0, 0);
+            Glide.with(this).load(visitaTecnica.getFotoPadrao()).into(foto_padrao_entrada_visualizar);
         } else {
             foto_padrao_entrada_visualizar.setVisibility(View.GONE);
             foto_padrao_textView.setVisibility(View.GONE);
         }
 
-        if(visitaTecnica.getFoto_orientacao_telhado() != null){
+        if(visitaTecnica.getFotoOrientacaoTelhado() != null){
            //
         } else {
             foto_orientacao_telhado_visualizar.setVisibility(View.GONE);
             foto_orientacao_textView.setVisibility(View.GONE);
         }
 
-        if(visitaTecnica.getFoto_acesso_telhado() != null){
+        if(visitaTecnica.getFotoAcessoTelhado() != null){
            //
         } else {
             foto_acesso_telhado_visualizar.setVisibility(View.GONE);

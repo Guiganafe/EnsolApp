@@ -21,9 +21,9 @@ public class VisitaTecnica {
     private String acessoAndaime;
     private String obsFinais;
     private String tecnicoId;
-    private String foto_padrao;
-    private String foto_orientacao_telhado;
-    private String foto_acesso_telhado;
+    private String fotoPadrao;
+    private String fotoOrientacaoTelhado;
+    private String fotoAcessoTelhado;
 
     public VisitaTecnica() {
     }
@@ -156,28 +156,28 @@ public class VisitaTecnica {
         this.tecnicoId = tecnicoId;
     }
 
-    public String getFoto_padrao() {
-        return foto_padrao;
+    public String getFotoPadrao() {
+        return fotoPadrao;
     }
 
-    public void setFoto_padrao(String foto_padrao) {
-        this.foto_padrao = foto_padrao;
+    public void setFotoPadrao(String foto_padrao) {
+        this.fotoPadrao = foto_padrao;
     }
 
-    public String getFoto_orientacao_telhado() {
-        return foto_orientacao_telhado;
+    public String getFotoOrientacaoTelhado() {
+        return fotoOrientacaoTelhado;
     }
 
-    public void setFoto_orientacao_telhado(String foto_orientacao_telhado) {
-        this.foto_orientacao_telhado = foto_orientacao_telhado;
+    public void setFotoOrientacaoTelhado(String foto_orientacao_telhado) {
+        this.fotoOrientacaoTelhado = foto_orientacao_telhado;
     }
 
-    public String getFoto_acesso_telhado() {
-        return foto_acesso_telhado;
+    public String getFotoAcessoTelhado() {
+        return fotoAcessoTelhado;
     }
 
-    public void setFoto_acesso_telhado(String foto_acesso_telhado) {
-        this.foto_acesso_telhado = foto_acesso_telhado;
+    public void setFotoAcessoTelhado(String foto_acesso_telhado) {
+        this.fotoAcessoTelhado = foto_acesso_telhado;
     }
 
     public Map<String, Object> toMap(){
@@ -224,16 +224,16 @@ public class VisitaTecnica {
             vt.put("obsFinais", getObsFinais());
         }
 
-        if(getFoto_padrao() != null){
-            vt.put("fotoPadrao", getFoto_padrao());
+        if(getFotoPadrao() != null){
+            vt.put("fotoPadrao", getFotoPadrao());
         }
 
-        if(getFoto_orientacao_telhado() != null){
-            vt.put("fotoOrientacaoTelhado", getFoto_orientacao_telhado());
+        if(getFotoOrientacaoTelhado() != null){
+            vt.put("fotoOrientacaoTelhado", getFotoOrientacaoTelhado());
         }
 
-        if(getFoto_acesso_telhado() != null){
-            vt.put("fotoAcessoTelhado", getFoto_acesso_telhado());
+        if(getFotoAcessoTelhado() != null){
+            vt.put("fotoAcessoTelhado", getFotoAcessoTelhado());
         }
 
         return vt;
