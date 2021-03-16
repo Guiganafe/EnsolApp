@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.util.SparseArray;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.ensolapp.Models.Fotos;
@@ -37,6 +38,8 @@ import java.io.OutputStream;
 import java.util.Locale;
 
 public class GerarPDF {
+
+    private ProgressBar progressBar;
 
     public static void gerarPDF(Context context, VisitaTecnica visitaTecnica, Fotos fotos) throws IOException {
 

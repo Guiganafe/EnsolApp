@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -54,6 +55,7 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -68,11 +70,11 @@ import java.util.Locale;
 
 public class FragmentVisitaTecnica_04 extends Fragment {
 
-    private Button btn_voltar, btn_finalizar;
+    private Button btn_voltar, btn_avancar_passo_5;
     private TextInputLayout edt_largura_telhado, edt_comprimento_telhado, edt_altura_telhado,
             edt_acesso_escada, edt_acesso_andaime, edt_obs_finais;
-    private ClienteViewModel clienteViewModel;
     private ImageView foto_acesso_telhado;
+    private ClienteViewModel clienteViewModel;
     private VisitaTecnicaViewModel visitaTecnicaViewModel;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -85,8 +87,8 @@ public class FragmentVisitaTecnica_04 extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        clienteViewModel =  new ViewModelProvider(requireActivity()).get(ClienteViewModel.class);
         visitaTecnicaViewModel = new ViewModelProvider(requireActivity()).get(VisitaTecnicaViewModel.class);
+        clienteViewModel = new ViewModelProvider(requireActivity()).get(ClienteViewModel.class);
         storageRef = FirebaseStorage.getInstance().getReference();
     }
 
@@ -97,9 +99,6 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         onClickController();
         textWatcherController();
         loadViewModelController();
-        if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(requireActivity(), new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
-        }
     }
 
     @Override
@@ -256,7 +255,7 @@ public class FragmentVisitaTecnica_04 extends Fragment {
     private void onClickController() {
         btn_voltar.setOnClickListener(v -> getActivity().onBackPressed());
 
-        btn_finalizar.setOnClickListener(this::validarDados);
+        btn_avancar_passo_5.setOnClickListener(this::validarDados);
 
         foto_acesso_telhado.setOnClickListener(v -> cameraPermissao(CAMERA_REQUEST_CODE));
     }
@@ -274,18 +273,10 @@ public class FragmentVisitaTecnica_04 extends Fragment {
             valido = false;
         }
 
-        if(visitaTecnicaViewModel.getFotoAcessoTelhado().getValue() != null){
-            enviarDados();
-        }
-
         if(valido){
             edt_acesso_escada.setError(null);
             edt_acesso_andaime.setError(null);
-            try {
-                salvar();
-            } catch (ParseException pe){
-                pe.printStackTrace();
-            }
+            Navigation.findNavController(v).navigate(R.id.action_fragmentVisitaTecnica_04_to_fragmentVisitaTecnica_05);
         }
     }
 
@@ -344,138 +335,18 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_REQUEST_CODE) {
                 File fileCam = new File(currentPhotoPath);
+                Bitmap foto = BitmapFactory.decodeFile(fileCam.getPath());
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                foto.compress(Bitmap.CompressFormat.JPEG, 15, out);
+                Bitmap foto_comprimida = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
                 foto_acesso_telhado.setBackground(null);
                 foto_acesso_telhado.setPadding(0, 0, 0, 0);
-                foto_acesso_telhado.setImageURI(Uri.fromFile(fileCam));
-
-                Bitmap fotoCamera = BitmapFactory.decodeFile(currentPhotoPath);
-                visitaTecnicaViewModel.setFotoAcessoTelhado(fotoCamera);
-
-                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                Uri contentUri = Uri.fromFile(fileCam);
-                mediaScanIntent.setData(contentUri);
-                requireActivity().sendBroadcast(mediaScanIntent);
+                foto_acesso_telhado.setImageBitmap(foto_comprimida);
+                visitaTecnicaViewModel.setFotoAcessoTelhado(foto_comprimida);
+                enviarDados();
                 currentPhotoPath = "";
             }
         }
-    }
-
-    private void baixarPermissao(VisitaTecnica visitaTecnica, Fotos fotos) {
-        if(ContextCompat.checkSelfPermission(requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(requireActivity(), new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
-        } else {
-            try{
-                GerarPDF.gerarPDF(requireActivity(), visitaTecnica, fotos);
-            }catch (FileNotFoundException fe){
-                fe.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private void salvar() throws ParseException {
-
-        VisitaTecnica visitaTecnica = new VisitaTecnica();
-        Cliente cliente = new Cliente();
-
-        //Dados obrigatórios
-        cliente.setNomeCliente(clienteViewModel.getNomeCliente().getValue());
-        cliente.setTelefone(clienteViewModel.getTelefone().getValue());
-        cliente.setEndereco(clienteViewModel.getEndereco().getValue());
-
-        //Dados não obrigatórios
-        if(clienteViewModel.getTipoCliente().getValue() != null){
-            cliente.setTipoCliente(clienteViewModel.getTipoCliente().getValue());
-        }
-
-        if(clienteViewModel.getRazaoSocial().getValue() != null){
-            cliente.setRazaoSocial(clienteViewModel.getRazaoSocial().getValue());
-        }
-
-        if(clienteViewModel.getResponsavel().getValue() != null){
-            cliente.setResponsavel(clienteViewModel.getResponsavel().getValue());
-        }
-
-        if(clienteViewModel.getCpf_cnpj().getValue() != null){
-            cliente.setCpf_cnpj(clienteViewModel.getCpf_cnpj().getValue());
-        }
-
-        if(clienteViewModel.getEmail().getValue() != null){
-            cliente.setEmail(clienteViewModel.getEmail().getValue());
-        }
-
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date data = formato.parse(visitaTecnicaViewModel.getDataVisita().getValue());
-        Calendar dataDoDia = Calendar.getInstance(Locale.getDefault());
-        data.setHours(dataDoDia.getTime().getHours());
-        data.setMinutes(dataDoDia.getTime().getMinutes());
-
-        //Dados obrigatórios
-        visitaTecnica.setDataVisita(data);
-        visitaTecnica.setCliente(cliente.toMap());
-        visitaTecnica.setPadraoEntrada(visitaTecnicaViewModel.getPadraoEntrada().getValue());
-        visitaTecnica.setLocalInstalacaoModulos(visitaTecnicaViewModel.getLocalInstalacaoModulos().getValue());
-        visitaTecnica.setMaterialEstruturaTelhado(visitaTecnicaViewModel.getMaterialEstruturaTelhado().getValue());
-        visitaTecnica.setOrientacaoTelhado(visitaTecnicaViewModel.getOrientacaoTelhado().getValue());
-        visitaTecnica.setAcessoEscada(visitaTecnicaViewModel.getAcessoEscada().getValue());
-        visitaTecnica.setAcessoAndaime(visitaTecnicaViewModel.getAcessoAndaime().getValue());
-        visitaTecnica.setTecnicoId(FirebaseService.getFirebaseUser().getUid());
-
-        //Dados não obrigatórios
-        if(visitaTecnicaViewModel.getAperagemDisjuntosEntrada().getValue() != null){
-            visitaTecnica.setAmperagemDisjuntosEntrada(visitaTecnicaViewModel.getAperagemDisjuntosEntrada().getValue());
-        }
-
-        if(visitaTecnicaViewModel.getCondicaoPadraoEntrada().getValue() != null){
-            visitaTecnica.setCondicaoPadraoEntrada(visitaTecnicaViewModel.getCondicaoPadraoEntrada().getValue());
-        }
-
-        if(visitaTecnicaViewModel.getCondicaoTelhado().getValue() != null){
-            visitaTecnica.setCondicaoTelhado(visitaTecnicaViewModel.getCondicaoTelhado().getValue());
-        }
-
-        if(visitaTecnicaViewModel.getLarguraTelhado().getValue() != null){
-            visitaTecnica.setLarguraTelhado(visitaTecnicaViewModel.getLarguraTelhado().getValue());
-        }
-
-        if(visitaTecnicaViewModel.getComprimentoTelhado().getValue() != null){
-            visitaTecnica.setComprimentoTelhado(visitaTecnicaViewModel.getComprimentoTelhado().getValue());
-        }
-
-        if(visitaTecnicaViewModel.getAlturaTelhado().getValue() != null){
-            visitaTecnica.setAlturaTelhado(visitaTecnicaViewModel.getAlturaTelhado().getValue());
-        }
-
-        if(visitaTecnicaViewModel.getObsFinais().getValue() != null){
-            visitaTecnica.setObsFinais(visitaTecnicaViewModel.getObsFinais().getValue());
-        }
-
-        Fotos fotos = new Fotos();
-
-        if(visitaTecnicaViewModel.getFotoPadraoEntrada().getValue() != null){
-            fotos.setFoto_padrao(visitaTecnicaViewModel.getFotoPadraoEntrada().getValue());
-            visitaTecnica.setFotoPadrao(visitaTecnicaViewModel.getFotoPadraoEntradaUrl().getValue());
-        }
-
-        if(visitaTecnicaViewModel.getFotoAcessoTelhado().getValue() != null){
-            fotos.setFoto_acesso_telhado(visitaTecnicaViewModel.getFotoAcessoTelhado().getValue());
-        }
-
-        if(visitaTecnicaViewModel.getFotoOrientacaoTelhado().getValue() != null){
-            fotos.setFoto_orientacao_telhado(visitaTecnicaViewModel.getFotoOrientacaoTelhado().getValue());
-        }
-
-        db.collection("visitas_tecnicas")
-                .add(visitaTecnica.toMap())
-                .addOnSuccessListener(documentReference -> {
-
-                })
-                .addOnFailureListener(e -> {
-
-                });
-        baixarPermissao(visitaTecnica, fotos);
-        requireActivity().finish();
     }
 
     private Task<String> enviarDados() {
@@ -484,7 +355,7 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         Bitmap bitmap = visitaTecnicaViewModel.getFotoAcessoTelhado().getValue();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = ImageRef.putBytes(data);
@@ -506,8 +377,8 @@ public class FragmentVisitaTecnica_04 extends Fragment {
     }
 
     private void inicializarComponentes(View view) {
-        btn_voltar = view.findViewById(R.id.btn_vs_voltar_passo_2);
-        btn_finalizar = view.findViewById(R.id.btn_finalizar);
+        btn_voltar = view.findViewById(R.id.btn_vs_voltar_passo_3);
+        btn_avancar_passo_5 = view.findViewById(R.id.btn_vs_avancar_passo_5);
         edt_largura_telhado = view.findViewById(R.id.edt_vt_largura_telhado);
         edt_comprimento_telhado = view.findViewById(R.id.edt_vt_comprimento_telhado);
         edt_altura_telhado = view.findViewById(R.id.edt_vt_altura_telhado);

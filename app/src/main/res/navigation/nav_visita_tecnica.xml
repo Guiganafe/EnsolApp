@@ -36,5 +36,14 @@
         android:id="@+id/fragmentVisitaTecnica_04"
         android:name="com.example.ensolapp.Fragments.FragmentVisitaTecnica_04"
         android:label="fragment_visita_tecnica_04"
-        tools:layout="@layout/fragment_visita_tecnica_04" />
+        tools:layout="@layout/fragment_visita_tecnica_04" >
+        <action
+            android:id="@+id/action_fragmentVisitaTecnica_04_to_fragmentVisitaTecnica_05"
+            app:destination="@id/fragmentVisitaTecnica_05" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentVisitaTecnica_05"
+        android:name="com.example.ensolapp.Fragments.FragmentVisitaTecnica_05"
+        android:label="fragment_visita_tecnica_05"
+        tools:layout="@layout/fragment_visita_tecnica_05" />
 </navigation>

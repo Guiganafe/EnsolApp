@@ -197,7 +197,7 @@
         android:layout_alignParentBottom="true">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_vs_voltar_passo_2"
+            android:id="@+id/btn_vs_voltar_passo_3"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"
@@ -206,13 +206,13 @@
             android:text="Voltar" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_finalizar"
+            android:id="@+id/btn_vs_avancar_passo_5"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:layout_marginStart="5dp"
             android:backgroundTint="@color/blue"
-            android:text="Finalizar" />
+            android:text="Avançar" />
 
     </LinearLayout>
 

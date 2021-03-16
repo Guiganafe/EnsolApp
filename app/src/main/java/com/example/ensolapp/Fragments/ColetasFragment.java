@@ -7,9 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ensolapp.Activity.VisitaTecnicaActivity;
 import com.example.ensolapp.Activity.VisualizarVisita;
@@ -26,13 +22,10 @@ import com.example.ensolapp.Adapters.VisitaTecnicaAdapter;
 import com.example.ensolapp.Base.VisitaTecnicaBase;
 import com.example.ensolapp.Models.VisitaTecnica;
 import com.example.ensolapp.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.text.Format;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 public class ColetasFragment extends Fragment implements VisitaTecnicaAdapter.onVisitaTecnicaItemListenner{
@@ -47,6 +40,7 @@ public class ColetasFragment extends Fragment implements VisitaTecnicaAdapter.on
     private ArrayList<String> visitaTecnicasId;
     private ArrayList<String> visitaTecnicasIdPorDia;
     private VisitaTecnicaAdapter adapter;
+    //private AdapterVisitaTecnica adapter;
     private RecyclerView recyclerView;
 
     @Override
@@ -97,7 +91,6 @@ public class ColetasFragment extends Fragment implements VisitaTecnicaAdapter.on
     }
 
     public void carregarAgendaDoDia(int dia, int mes, int ano){
-        Toast.makeText(requireActivity(), "Data que chegou: " + dia + "/" + mes + "/" + ano, Toast.LENGTH_SHORT).show();
         final Calendar dataDoDia = Calendar.getInstance(Locale.getDefault()), dataDiaSeguinte = Calendar.getInstance(Locale.getDefault());
         dataDoDia.set(ano, mes-1, dia, 0, 0, 0);
         dataDiaSeguinte.set(ano, mes-1, dia, 23 ,59, 59);
@@ -156,6 +149,15 @@ public class ColetasFragment extends Fragment implements VisitaTecnicaAdapter.on
         Intent visualizarVisita = new Intent(requireActivity(), VisualizarVisita.class);
         visualizarVisita.putExtra("position", position);
         startActivity(visualizarVisita);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        dia = calendar.get(Calendar.DAY_OF_MONTH);
+        mes = calendar.get(Calendar.MONTH);
+        ano = calendar.get(Calendar.YEAR);
+        carregarAgendaDoDia(dia, mes+1, ano);
     }
 
     private void inicializarComponentes(View view) {

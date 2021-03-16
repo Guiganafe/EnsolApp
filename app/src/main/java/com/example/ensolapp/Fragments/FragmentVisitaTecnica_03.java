@@ -51,6 +51,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -166,9 +167,6 @@ public class FragmentVisitaTecnica_03 extends Fragment {
 
         if(valido)
         {
-            if(visitaTecnicaViewModel.getFotoOrientacaoTelhado().getValue() != null){
-                enviarDados();
-            }
             Navigation.findNavController(view)
                     .navigate(R.id.action_fragmentVisitaTecnica_03_to_fragmentVisitaTecnica_04);
         }
@@ -229,17 +227,15 @@ public class FragmentVisitaTecnica_03 extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA_REQUEST_CODE) {
                 File fileCam = new File(currentPhotoPath);
+                Bitmap foto = BitmapFactory.decodeFile(fileCam.getPath());
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                foto.compress(Bitmap.CompressFormat.JPEG, 15, out);
+                Bitmap foto_comprimida = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
                 foto_orientacao_telhado.setBackground(null);
                 foto_orientacao_telhado.setPadding(0, 0, 0, 0);
-                foto_orientacao_telhado.setImageURI(Uri.fromFile(fileCam));
-
-                Bitmap fotoCamera = BitmapFactory.decodeFile(currentPhotoPath);
-                visitaTecnicaViewModel.setFotoOrientacaoTelhado(fotoCamera);
-
-                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                Uri contentUri = Uri.fromFile(fileCam);
-                mediaScanIntent.setData(contentUri);
-                requireActivity().sendBroadcast(mediaScanIntent);
+                foto_orientacao_telhado.setImageBitmap(foto_comprimida);
+                visitaTecnicaViewModel.setFotoOrientacaoTelhado(foto_comprimida);
+                enviarDados();
                 currentPhotoPath = "";
             }
         }
@@ -251,7 +247,7 @@ public class FragmentVisitaTecnica_03 extends Fragment {
         Bitmap bitmap = visitaTecnicaViewModel.getFotoOrientacaoTelhado().getValue();
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = ImageRef.putBytes(data);

@@ -1,8 +1,12 @@
 package com.example.ensolapp.Activity;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,12 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.ensolapp.Base.VisitaTecnicaBase;
 import com.example.ensolapp.Models.Fotos;
 import com.example.ensolapp.Models.VisitaTecnica;
 import com.example.ensolapp.R;
+import com.example.ensolapp.Utils.GerarPDF;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.io.IOException;
 import java.util.Locale;
 
 public class VisualizarVisita extends AppCompatActivity {
@@ -44,6 +52,17 @@ public class VisualizarVisita extends AppCompatActivity {
         setContentView(R.layout.activity_visualizar_visita);
         inicializarComponentes();
         carregadDadosController();
+        onClickController();
+    }
+
+    private void onClickController() {
+        fab_download_form.setOnClickListener(view -> {
+            try {
+                GerarPDF.gerarPDF(this, visitaTecnica, fotos);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void carregadDadosController() {
@@ -143,24 +162,66 @@ public class VisualizarVisita extends AppCompatActivity {
             obs_finais_textView.setVisibility(View.GONE);
         }
 
+        fotos = new Fotos();
+
         if(visitaTecnica.getFotoPadrao() != null){
             foto_padrao_entrada_visualizar.setBackground(null);
             foto_padrao_entrada_visualizar.setPadding(0, 0, 0, 0);
             Glide.with(this).load(visitaTecnica.getFotoPadrao()).into(foto_padrao_entrada_visualizar);
+            //Salva a imagem em Bitmap no Model de fotos
+            Glide.with(this).asBitmap().load(visitaTecnica.getFotoPadrao()).into(new CustomTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    fotos.setFoto_padrao(resource);
+                }
+
+                @Override
+                public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                }
+            });
         } else {
             foto_padrao_entrada_visualizar.setVisibility(View.GONE);
             foto_padrao_textView.setVisibility(View.GONE);
         }
 
         if(visitaTecnica.getFotoOrientacaoTelhado() != null){
-           //
+            foto_orientacao_telhado_visualizar.setBackground(null);
+            foto_orientacao_telhado_visualizar.setPadding(0, 0, 0, 0);
+            Glide.with(this).load(visitaTecnica.getFotoOrientacaoTelhado()).into(foto_orientacao_telhado_visualizar);
+            //Salva a imagem em Bitmap no Model de fotos
+            Glide.with(this).asBitmap().load(visitaTecnica.getFotoOrientacaoTelhado()).into(new CustomTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    fotos.setFoto_orientacao_telhado(resource);
+                }
+
+                @Override
+                public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                }
+            });
         } else {
             foto_orientacao_telhado_visualizar.setVisibility(View.GONE);
             foto_orientacao_textView.setVisibility(View.GONE);
         }
 
         if(visitaTecnica.getFotoAcessoTelhado() != null){
-           //
+            foto_acesso_telhado_visualizar.setBackground(null);
+            foto_acesso_telhado_visualizar.setPadding(0, 0, 0, 0);
+            Glide.with(this).load(visitaTecnica.getFotoAcessoTelhado()).into(foto_acesso_telhado_visualizar);
+            //Salva a imagem em Bitmap no Model de fotos
+            Glide.with(this).asBitmap().load(visitaTecnica.getFotoAcessoTelhado()).into(new CustomTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                    fotos.setFoto_acesso_telhado(resource);
+                }
+
+                @Override
+                public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                }
+            });
         } else {
             foto_acesso_telhado_visualizar.setVisibility(View.GONE);
             foto_acesso_textView.setVisibility(View.GONE);
