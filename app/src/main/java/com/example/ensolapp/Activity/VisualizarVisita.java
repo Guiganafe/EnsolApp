@@ -25,6 +25,7 @@ import com.example.ensolapp.Utils.GerarPDF;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 public class VisualizarVisita extends AppCompatActivity {
@@ -104,8 +105,10 @@ public class VisualizarVisita extends AppCompatActivity {
             layout_email.setVisibility(View.GONE);
         }
 
-        int dia = visitaTecnica.getDataVisita().getDay(), mes = visitaTecnica.getDataVisita().getMonth() + 1, ano = visitaTecnica.getDataVisita().getYear();
-        data_visita_visualizar.setText(String.format(Locale.getDefault(),"%02d/%02d/%d", dia, mes, ano));
+        String pattern = "dd/MM/yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(visitaTecnica.getDataVisita());
+        data_visita_visualizar.setText(date);
 
         padrao_entrada_visualizar.setText(visitaTecnica.getPadraoEntrada());
 
