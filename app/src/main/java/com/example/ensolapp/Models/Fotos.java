@@ -3,15 +3,16 @@ package com.example.ensolapp.Models;
 import android.graphics.Bitmap;
 
 public class Fotos {
-    private Bitmap foto_padrao, foto_acesso_telhado, foto_orientacao_telhado;
+    private Bitmap foto_padrao, foto_acesso_telhado, foto_orientacao_telhado, fotoLocalInstalacaoInversor;
 
     public Fotos() {
     }
 
-    public Fotos(Bitmap foto_padrao, Bitmap foto_acesso_telhado, Bitmap foto_orientacao_telhado) {
+    public Fotos(Bitmap foto_padrao, Bitmap foto_acesso_telhado, Bitmap foto_orientacao_telhado, Bitmap foto_inversor) {
         this.foto_padrao = foto_padrao;
         this.foto_acesso_telhado = foto_acesso_telhado;
         this.foto_orientacao_telhado = foto_orientacao_telhado;
+        this.fotoLocalInstalacaoInversor = foto_inversor;
     }
 
     public Bitmap getFoto_padrao() {
@@ -36,5 +37,13 @@ public class Fotos {
 
     public void setFoto_orientacao_telhado(Bitmap foto_orientacao_telhado) {
         this.foto_orientacao_telhado = foto_orientacao_telhado;
+    }
+
+    public Bitmap getFotoLocalInstalacaoInversor() {
+        return fotoLocalInstalacaoInversor;
+    }
+
+    public void setFotoLocalInstalacaoInversor(Bitmap fotoLocalInstalacaoInversor) {
+        this.fotoLocalInstalacaoInversor = fotoLocalInstalacaoInversor;
     }
 }

@@ -16,6 +16,8 @@ public class VisitaTecnicaViewModel extends ViewModel {
     private MutableLiveData<Integer> padraoEntradaPosition = new MutableLiveData<>();
     private MutableLiveData<String> aperagemDisjuntosEntrada = new MutableLiveData<>();
     private MutableLiveData<String> condicaoPadraoEntrada = new MutableLiveData<>();
+    private MutableLiveData<String> tipoRamal = new MutableLiveData<>();
+    private MutableLiveData<String> numeroUc = new MutableLiveData<>();
     private MutableLiveData<Integer> condicaoPadraoEntradaPositon = new MutableLiveData<>();
     private MutableLiveData<String> localInstalacaoModulos = new MutableLiveData<>();
     private MutableLiveData<Integer> localInstalacaoModulosPosition = new MutableLiveData<>();
@@ -28,15 +30,16 @@ public class VisitaTecnicaViewModel extends ViewModel {
     private MutableLiveData<String> larguraTelhado = new MutableLiveData<>();
     private MutableLiveData<String> comprimentoTelhado = new MutableLiveData<>();
     private MutableLiveData<String> alturaTelhado = new MutableLiveData<>();
-    private MutableLiveData<String> acessoEscada = new MutableLiveData<>();
-    private MutableLiveData<String> acessoAndaime = new MutableLiveData<>();
+    private MutableLiveData<String> acessoTelhado = new MutableLiveData<>();
     private MutableLiveData<String> obsFinais = new MutableLiveData<>();
     private MutableLiveData<Bitmap> fotoPadraoEntrada = new MutableLiveData<>();
     private MutableLiveData<Bitmap> fotoOrientacaoTelhado = new MutableLiveData<>();
     private MutableLiveData<Bitmap> fotoAcessoTelhado = new MutableLiveData<>();
+    private MutableLiveData<Bitmap> fotoLocalInstalacaoInversor = new MutableLiveData<>();
     private MutableLiveData<String> fotoPadraoEntradaUrl = new MutableLiveData<>();
     private MutableLiveData<String> fotoOrientacaoTelhadoUrl = new MutableLiveData<>();
     private MutableLiveData<String> fotoAcessoTelhadoUrl = new MutableLiveData<>();
+    private MutableLiveData<String> fotoLocalInstalacaoInversorUrl = new MutableLiveData<>();
 
     public LiveData<String> getDataVisita() {
         return dataVisita;
@@ -124,22 +127,6 @@ public class VisitaTecnicaViewModel extends ViewModel {
 
     public void setAlturaTelhado(String alturaTelhado) {
         this.alturaTelhado.setValue(alturaTelhado);
-    }
-
-    public LiveData<String> getAcessoEscada() {
-        return acessoEscada;
-    }
-
-    public void setAcessoEscada(String acessoEscada) {
-        this.acessoEscada.setValue(acessoEscada);
-    }
-
-    public LiveData<String> getAcessoAndaime() {
-        return acessoAndaime;
-    }
-
-    public void setAcessoAndaime(String acessoAndaime) {
-        this.acessoAndaime.setValue(acessoAndaime);
     }
 
     public LiveData<String> getObsFinais() {
@@ -244,5 +231,45 @@ public class VisitaTecnicaViewModel extends ViewModel {
 
     public void setFotoAcessoTelhadoUrl(String fotoAcessoTelhadoUrl) {
         this.fotoAcessoTelhadoUrl.setValue(fotoAcessoTelhadoUrl);
+    }
+
+    public LiveData<Bitmap> getFotoLocalInstalacaoInversor() {
+        return fotoLocalInstalacaoInversor;
+    }
+
+    public void setFotoLocalInstalacaoInversor(Bitmap fotoLocalInstalacaoInversor) {
+        this.fotoLocalInstalacaoInversor.setValue(fotoLocalInstalacaoInversor);
+    }
+
+    public LiveData<String> getFotoLocalInstalacaoInversorUrl() {
+        return fotoLocalInstalacaoInversorUrl;
+    }
+
+    public void setFotoLocalInstalacaoInversorUrl(String fotoLocalInstalacaoInversorUrl) {
+        this.fotoLocalInstalacaoInversorUrl.setValue(fotoLocalInstalacaoInversorUrl);
+    }
+
+    public LiveData<String> getTipoRamal() {
+        return tipoRamal;
+    }
+
+    public void setTipoRamal(String tipoRamal) {
+        this.tipoRamal.setValue(tipoRamal);
+    }
+
+    public LiveData<String> getNumeroUc() {
+        return numeroUc;
+    }
+
+    public void setNumeroUc(String numeroUc) {
+        this.numeroUc.setValue(numeroUc);
+    }
+
+    public LiveData<String> getAcessoTelhado() {
+        return acessoTelhado;
+    }
+
+    public void setAcessoTelhado(String acessoTelhado) {
+        this.acessoTelhado.setValue(acessoTelhado);
     }
 }

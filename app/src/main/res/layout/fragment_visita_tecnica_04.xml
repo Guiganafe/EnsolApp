@@ -83,73 +83,49 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Acesso ao telhado:"
                 android:layout_margin="5dp"
-                android:textStyle="bold"/>
+                android:text="Acesso ao telhado*"
+                android:textStyle="bold" />
 
-            <LinearLayout
+            <RadioGroup
+                android:id="@+id/rg_acessoTelhado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="5dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_acesso_Telhado_escada"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Até 5 metros:"
-                    android:layout_marginStart="5dp"
-                    android:textStyle="bold"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="Escada"/>
 
-                <TextView
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_vs_acesso_telhado_andaime"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Até 5 metros:"
-                    android:layout_marginStart="5dp"
-                    android:textStyle="bold"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:text="Andaime"/>
 
-            </LinearLayout>
+            </RadioGroup>
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_margin="5dp"
+                android:text="Foto do local de instalação do inversor"
+                android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_vt_acesso_escada"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:hint="Escada*">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edt_vt_acesso_andaime"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:hint="Andaime*">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/foto_instalacao_inversor"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Foto do local de instalação do inversor" />
 
             <TextView
                 android:layout_width="match_parent"

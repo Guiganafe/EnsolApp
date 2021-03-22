@@ -10,6 +10,8 @@ public class VisitaTecnica {
     private String padraoEntrada;
     private String amperagemDisjuntosEntrada;
     private String condicaoPadraoEntrada;
+    private String tipoRamal;
+    private String numeroUc;
     private String localInstalacaoModulos;
     private String materialEstruturaTelhado;
     private String condicaoTelhado;
@@ -17,13 +19,13 @@ public class VisitaTecnica {
     private String larguraTelhado;
     private String comprimentoTelhado;
     private String alturaTelhado;
-    private String acessoEscada;
-    private String acessoAndaime;
+    private String acessoTelhado;
     private String obsFinais;
     private String tecnicoId;
     private String fotoPadrao;
     private String fotoOrientacaoTelhado;
     private String fotoAcessoTelhado;
+    private String fotoLocalInstalacaoInversor;
 
     public VisitaTecnica() {
     }
@@ -116,22 +118,6 @@ public class VisitaTecnica {
         this.alturaTelhado = alturaTelhado;
     }
 
-    public String getAcessoEscada() {
-        return acessoEscada;
-    }
-
-    public void setAcessoEscada(String acessoEscada) {
-        this.acessoEscada = acessoEscada;
-    }
-
-    public String getAcessoAndaime() {
-        return acessoAndaime;
-    }
-
-    public void setAcessoAndaime(String acessoAndaime) {
-        this.acessoAndaime = acessoAndaime;
-    }
-
     public String getObsFinais() {
         return obsFinais;
     }
@@ -180,6 +166,38 @@ public class VisitaTecnica {
         this.fotoAcessoTelhado = foto_acesso_telhado;
     }
 
+    public String getTipoRamal() {
+        return tipoRamal;
+    }
+
+    public void setTipoRamal(String tipoRamal) {
+        this.tipoRamal = tipoRamal;
+    }
+
+    public String getNumeroUc() {
+        return numeroUc;
+    }
+
+    public void setNumeroUc(String numeroUc) {
+        this.numeroUc = numeroUc;
+    }
+
+    public String getAcessoTelhado() {
+        return acessoTelhado;
+    }
+
+    public void setAcessoTelhado(String acessoTelhado) {
+        this.acessoTelhado = acessoTelhado;
+    }
+
+    public String getFotoLocalInstalacaoInversor() {
+        return fotoLocalInstalacaoInversor;
+    }
+
+    public void setFotoLocalInstalacaoInversor(String fotoLocalInstalacaoInversor) {
+        this.fotoLocalInstalacaoInversor = fotoLocalInstalacaoInversor;
+    }
+
     public Map<String, Object> toMap(){
 
         Map<String, Object> vt = new HashMap<>();
@@ -191,13 +209,20 @@ public class VisitaTecnica {
         vt.put("localInstalacaoModulos", getLocalInstalacaoModulos());
         vt.put("materialEstruturaTelhado", getMaterialEstruturaTelhado());
         vt.put("orientacaoTelhado", getOrientacaoTelhado());
-        vt.put("acessoEscada", getAcessoEscada());
-        vt.put("acessoAndaime", getAcessoAndaime());
+        vt.put("acessoTelhado", getAcessoTelhado());
         vt.put("tecnicoId", getTecnicoId());
 
         //Campos não obrigatórios
         if(getAmperagemDisjuntosEntrada() != null){
             vt.put("aperagemDisjuntosEntrada", getAmperagemDisjuntosEntrada());
+        }
+
+        if(getTipoRamal() != null){
+            vt.put("tipoRamal", getAmperagemDisjuntosEntrada());
+        }
+
+        if(getNumeroUc() != null){
+            vt.put("numeroUc", getAmperagemDisjuntosEntrada());
         }
 
         if(getCondicaoPadraoEntrada() != null){
@@ -217,7 +242,7 @@ public class VisitaTecnica {
         }
 
         if(getAlturaTelhado() != null){
-            vt.put("alturaTelhado", getAlturaTelhado());
+            vt.put("acessoTelhado", getAlturaTelhado());
         }
 
         if(getObsFinais() != null){
@@ -234,6 +259,10 @@ public class VisitaTecnica {
 
         if(getFotoAcessoTelhado() != null){
             vt.put("fotoAcessoTelhado", getFotoAcessoTelhado());
+        }
+
+        if(getFotoLocalInstalacaoInversor() != null){
+            vt.put("fotoLocalInstalacaoInversor", getAlturaTelhado());
         }
 
         return vt;
