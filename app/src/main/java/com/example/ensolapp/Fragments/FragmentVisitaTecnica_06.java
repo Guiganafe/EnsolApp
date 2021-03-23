@@ -271,6 +271,9 @@ public class FragmentVisitaTecnica_06 extends Fragment {
         visitaTecnica.setLocalInstalacaoModulos(visitaTecnicaViewModel.getLocalInstalacaoModulos().getValue());
         visitaTecnica.setMaterialEstruturaTelhado(visitaTecnicaViewModel.getMaterialEstruturaTelhado().getValue());
         visitaTecnica.setOrientacaoTelhado(visitaTecnicaViewModel.getOrientacaoTelhado().getValue());
+        visitaTecnica.setTipoRamal(visitaTecnicaViewModel.getTipoRamal().getValue());
+        visitaTecnica.setAcessoTelhado(visitaTecnicaViewModel.getAcessoTelhado().getValue());
+        visitaTecnica.setNumeroUc(visitaTecnicaViewModel.getNumeroUc().getValue());
         visitaTecnica.setTecnicoId(FirebaseService.getFirebaseUser().getUid());
 
         //Dados não obrigatórios

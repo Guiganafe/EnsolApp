@@ -218,11 +218,11 @@ public class VisitaTecnica {
         }
 
         if(getTipoRamal() != null){
-            vt.put("tipoRamal", getAmperagemDisjuntosEntrada());
+            vt.put("tipoRamal", getTipoRamal());
         }
 
         if(getNumeroUc() != null){
-            vt.put("numeroUc", getAmperagemDisjuntosEntrada());
+            vt.put("numeroUc", getNumeroUc());
         }
 
         if(getCondicaoPadraoEntrada() != null){
@@ -262,7 +262,7 @@ public class VisitaTecnica {
         }
 
         if(getFotoLocalInstalacaoInversor() != null){
-            vt.put("fotoLocalInstalacaoInversor", getAlturaTelhado());
+            vt.put("fotoLocalInstalacaoInversor", getFotoLocalInstalacaoInversor());
         }
 
         return vt;

@@ -277,8 +277,8 @@ public class FragmentVisitaTecnica_04 extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == CAMERA_REQUEST_CODE) {
+        if(resultCode != Activity.RESULT_CANCELED) {
+            if (resultCode == Activity.RESULT_OK && requestCode == CAMERA_REQUEST_CODE) {
                 File fileCam = new File(currentPhotoPath);
                 Bitmap foto = BitmapFactory.decodeFile(fileCam.getPath());
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -288,8 +288,14 @@ public class FragmentVisitaTecnica_04 extends Fragment {
                 foto_acesso_telhado.setPadding(0, 0, 0, 0);
                 foto_acesso_telhado.setImageBitmap(foto_comprimida);
                 visitaTecnicaViewModel.setFotoAcessoTelhado(foto_comprimida);
-                enviarDados();
+                Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                Uri contentUri = Uri.fromFile(fileCam);
+                mediaScanIntent.setData(contentUri);
+                requireActivity().sendBroadcast(mediaScanIntent);
                 currentPhotoPath = "";
+                enviarDados();
+            } else {
+                Toast.makeText(requireActivity(), "Erro, tire a foto novamente!", Toast.LENGTH_SHORT).show();
             }
         }
     }

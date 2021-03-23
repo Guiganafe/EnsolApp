@@ -316,6 +316,30 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layout_numero_uc_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Número UC: "/>
+
+                    <TextView
+                        android:id="@+id/numero_uc_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="256"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/layout_condicao_padrao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -336,6 +360,30 @@
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:text="Boa"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_tipo_ramal_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Tipo do ramal: "/>
+
+                    <TextView
+                        android:id="@+id/tipo_ramal_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Subterrâneo"/>
 
                 </LinearLayout>
 
@@ -526,14 +574,29 @@
 
                 </LinearLayout>
 
-                <TextView
+                <LinearLayout
+                    android:id="@+id/layout_acesso_telhado_visualizar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:text="Acesso ao telhado:"/>
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Acesso ao telhado:"/>
+
+                    <TextView
+                        android:id="@+id/acesso_telhado_visualizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Escada"/>
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/layout_escada_acesso"
@@ -602,6 +665,24 @@
                     android:contentDescription="Foto padrão" />
 
                 <TextView
+                    android:id="@+id/foto_inversor_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Foto do local de instalação do inversor"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/foto_inversor_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto inversor" />
+
+                <TextView
                     android:id="@+id/obs_finais_textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -614,8 +695,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Eu gostei da visita"
-                    android:textStyle="bold" />
+                    android:text="Eu gostei da visita" />
 
             </LinearLayout>
 

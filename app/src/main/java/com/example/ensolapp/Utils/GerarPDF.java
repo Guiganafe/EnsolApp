@@ -43,7 +43,7 @@ public class GerarPDF {
 
     public static void gerarPDF(Context context, VisitaTecnica visitaTecnica, Fotos fotos) throws IOException {
 
-        Bitmap foto_padrao, foto_acesso_telhado, foto_orientacao_telhado;
+        Bitmap foto_padrao, foto_acesso_telhado, foto_orientacao_telhado, foto_inversor;
 
         String pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
         File file = new File(pdfPath, "Visita_" + visitaTecnica.getCliente().get("nomeCliente") + ".pdf");
@@ -142,8 +142,18 @@ public class GerarPDF {
             document.add(paragraph);
         }
 
+        if(visitaTecnica.getNumeroUc() != null){
+            Paragraph paragraph = new Paragraph(new Text("Número UC: " + visitaTecnica.getNumeroUc()).setFontSize(20));
+            document.add(paragraph);
+        }
+
         if(visitaTecnica.getCondicaoPadraoEntrada() != null){
             Paragraph paragraph = new Paragraph(new Text("Condição do padrão de entrada: " + visitaTecnica.getCondicaoPadraoEntrada()).setFontSize(20));
+            document.add(paragraph);
+        }
+
+        if(visitaTecnica.getTipoRamal() != null){
+            Paragraph paragraph = new Paragraph(new Text("Tipo do ramal: " + visitaTecnica.getTipoRamal()).setFontSize(20));
             document.add(paragraph);
         }
 
@@ -182,6 +192,11 @@ public class GerarPDF {
 
         if(visitaTecnica.getAlturaTelhado() != null){
             Paragraph paragraph = new Paragraph(new Text("Altura do telhado: " + visitaTecnica.getAlturaTelhado() + " metros").setFontSize(20));
+            document.add(paragraph);
+        }
+
+        if(visitaTecnica.getAcessoTelhado() != null){
+            Paragraph paragraph = new Paragraph(new Text("Acesso ao telhado: " + visitaTecnica.getAcessoTelhado() + " metros").setFontSize(20));
             document.add(paragraph);
         }
 
@@ -239,6 +254,22 @@ public class GerarPDF {
             Paragraph p_foto_orientacao = new Paragraph(new Text("Foto da orientação do telhado").setFontSize(20));
             p_foto_orientacao.setTextAlignment(TextAlignment.CENTER);
             document.add(p_foto_orientacao);
+        }
+
+        if(fotos.getFotoLocalInstalacaoInversor() != null){
+            //Configuração de exibição da foto
+            foto_inversor = fotos.getFotoLocalInstalacaoInversor();
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            foto_inversor.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            byte[] fotoByte = stream.toByteArray();
+            ImageData fotoData = ImageDataFactory.create(fotoByte);
+            Image img = new Image(fotoData);
+            //Insere a imagem no PDF
+            document.add(img);
+            //Insere o título da imagem no PDF
+            Paragraph p_foto_inversor = new Paragraph(new Text("Foto do local de instalação do inversor").setFontSize(20));
+            p_foto_inversor.setTextAlignment(TextAlignment.CENTER);
+            document.add(p_foto_inversor);
         }
 
         document.close();
