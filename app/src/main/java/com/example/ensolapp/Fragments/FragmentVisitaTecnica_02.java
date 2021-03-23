@@ -55,8 +55,8 @@ import java.util.Date;
 public class FragmentVisitaTecnica_02 extends Fragment {
 
     private Button btn_voltar, btn_avancar;
-    private TextInputLayout edt_amperagem_disjuntor;
-    private RadioGroup rg_padrao_entrada, rg_condicao_padrao_entrada, rg_local_instalacao;
+    private TextInputLayout edt_amperagem_disjuntor, edt_numero_uc;
+    private RadioGroup rg_padrao_entrada, rg_condicao_padrao_entrada, rg_local_instalacao, rg_tipo_ramal;
     private ImageView foto_padrao_entrada;
     private RadioButton rb_checked;
     private VisitaTecnicaViewModel visitaTecnicaViewModel;
@@ -97,13 +97,22 @@ public class FragmentVisitaTecnica_02 extends Fragment {
 
     private void loadViewModelController() {
         String amperagem = visitaTecnicaViewModel.getAperagemDisjuntosEntrada().getValue();
+        String numeroUc = visitaTecnicaViewModel.getNumeroUc().getValue();
 
         if (!TextUtils.isEmpty(amperagem)){
             edt_amperagem_disjuntor.getEditText().setText(amperagem);
         }
 
+        if (!TextUtils.isEmpty(numeroUc)){
+            edt_numero_uc.getEditText().setText(numeroUc);
+        }
+
         if(visitaTecnicaViewModel.getPadraoEntradaPosition().getValue() != null){
             rg_padrao_entrada.check(rg_padrao_entrada.getChildAt(visitaTecnicaViewModel.getPadraoEntradaPosition().getValue()).getId());
+        }
+
+        if(visitaTecnicaViewModel.getTipoRamalPosition().getValue() != null){
+            rg_tipo_ramal.check(rg_tipo_ramal.getChildAt(visitaTecnicaViewModel.getTipoRamalPosition().getValue()).getId());
         }
 
         if(visitaTecnicaViewModel.getCondicaoPadraoEntradaPositon().getValue() != null){
@@ -148,6 +157,15 @@ public class FragmentVisitaTecnica_02 extends Fragment {
             visitaTecnicaViewModel.setLocalInstalacaoModulos(textoRB);
             visitaTecnicaViewModel.setLocalInstalacaoModulosPosition(position);
         });
+
+        rg_tipo_ramal.setOnCheckedChangeListener((group, checkedId) -> {
+            rb_checked = view.findViewById(checkedId);
+            String textoRB = rb_checked.getText().toString();
+            int position = group.indexOfChild(rb_checked);
+
+            visitaTecnicaViewModel.setTipoRamal(textoRB);
+            visitaTecnicaViewModel.setTipoRamalPosition(position);
+        });
     }
 
     private void textWatcherController() {
@@ -164,6 +182,23 @@ public class FragmentVisitaTecnica_02 extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        edt_numero_uc.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                visitaTecnicaViewModel.setNumeroUc(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
@@ -185,6 +220,12 @@ public class FragmentVisitaTecnica_02 extends Fragment {
             valido = false;
         } else if(visitaTecnicaViewModel.getLocalInstalacaoModulos().getValue() == null){
             Toast.makeText(requireActivity(), "Defina o local de instalação", Toast.LENGTH_SHORT).show();
+            valido = false;
+        } else if(visitaTecnicaViewModel.getTipoRamal().getValue() == null){
+            Toast.makeText(requireActivity(), "Escolha o tipo do ramal", Toast.LENGTH_SHORT).show();
+            valido = false;
+        } else if(visitaTecnicaViewModel.getNumeroUc().getValue() == null){
+            edt_numero_uc.setError("Insira o número do uc");
             valido = false;
         }
 
@@ -300,5 +341,7 @@ public class FragmentVisitaTecnica_02 extends Fragment {
         rg_condicao_padrao_entrada = view.findViewById(R.id.rg_condicao_padrao_entrada);
         rg_local_instalacao = view.findViewById(R.id.rg_local_instalacao);
         foto_padrao_entrada = view.findViewById(R.id.foto_padrao_entrada);
+        edt_numero_uc = view.findViewById(R.id.edt_vt_numero_uc);
+        rg_tipo_ramal = view.findViewById(R.id.rg_tipo_ramal);
     }
 }

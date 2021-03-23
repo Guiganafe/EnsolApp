@@ -31,6 +31,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.example.ensolapp.BuildConfig;
@@ -71,11 +73,12 @@ import java.util.Locale;
 public class FragmentVisitaTecnica_04 extends Fragment {
 
     private Button btn_voltar, btn_avancar_passo_5;
-    private TextInputLayout edt_largura_telhado, edt_comprimento_telhado, edt_altura_telhado,
-            edt_acesso_escada, edt_acesso_andaime, edt_obs_finais;
+    private TextInputLayout edt_largura_telhado, edt_comprimento_telhado, edt_altura_telhado;
     private ImageView foto_acesso_telhado;
     private ClienteViewModel clienteViewModel;
     private VisitaTecnicaViewModel visitaTecnicaViewModel;
+    private RadioGroup rg_acessoTelhado;
+    private RadioButton rb_checked;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private StorageReference storageRef;
@@ -99,6 +102,7 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         onClickController();
         textWatcherController();
         loadViewModelController();
+        radioGroupController(view);
     }
 
     @Override
@@ -108,14 +112,21 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         return inflater.inflate(R.layout.fragment_visita_tecnica_04, container, false);
     }
 
+    private void radioGroupController(View view) {
+        rg_acessoTelhado.setOnCheckedChangeListener((group, checkedId) -> {
+            rb_checked = view.findViewById(checkedId);
+            String textoRB = rb_checked.getText().toString();
+            int position = group.indexOfChild(rb_checked);
+
+            visitaTecnicaViewModel.setAcessoTelhado(textoRB);
+            visitaTecnicaViewModel.setAcessoTelhadoPosition(position);
+        });
+    }
 
     private void loadViewModelController() {
         String largura_telhado = visitaTecnicaViewModel.getLarguraTelhado().getValue(),
                 comprimento_telhado = visitaTecnicaViewModel.getComprimentoTelhado().getValue(),
-                altura_telhado = visitaTecnicaViewModel.getAlturaTelhado().getValue(),
-                acesso_escada = visitaTecnicaViewModel.getAcessoEscada().getValue(),
-                acesso_andaime = visitaTecnicaViewModel.getAcessoAndaime().getValue(),
-                obs_finais = visitaTecnicaViewModel.getObsFinais().getValue();
+                altura_telhado = visitaTecnicaViewModel.getAlturaTelhado().getValue();
 
         if (!TextUtils.isEmpty(largura_telhado)){
             edt_largura_telhado.getEditText().setText(largura_telhado);
@@ -129,16 +140,8 @@ public class FragmentVisitaTecnica_04 extends Fragment {
             edt_altura_telhado.getEditText().setText(altura_telhado);
         }
 
-        if (!TextUtils.isEmpty(acesso_escada)){
-            edt_acesso_escada.getEditText().setText(acesso_escada);
-        }
-
-        if (!TextUtils.isEmpty(acesso_andaime)){
-            edt_acesso_andaime.getEditText().setText(acesso_andaime);
-        }
-
-        if (!TextUtils.isEmpty(obs_finais)){
-            edt_obs_finais.getEditText().setText(obs_finais);
+        if(visitaTecnicaViewModel.getAcessoTelhadoPosition().getValue() != null){
+            rg_acessoTelhado.check(rg_acessoTelhado.getChildAt(visitaTecnicaViewModel.getAcessoTelhadoPosition().getValue()).getId());
         }
 
         if(visitaTecnicaViewModel.getFotoAcessoTelhado().getValue() != null){
@@ -199,57 +202,6 @@ public class FragmentVisitaTecnica_04 extends Fragment {
 
             }
         });
-
-        edt_acesso_escada.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                visitaTecnicaViewModel.setAcessoEscada(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_acesso_andaime.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                visitaTecnicaViewModel.setAcessoAndaime(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        edt_obs_finais.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                visitaTecnicaViewModel.setObsFinais(s.toString());
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
     }
 
     private void onClickController() {
@@ -263,19 +215,12 @@ public class FragmentVisitaTecnica_04 extends Fragment {
     private void validarDados(View v) {
         boolean valido = true;
 
-        if(visitaTecnicaViewModel.getAcessoEscada().getValue() == null){
-            edt_acesso_escada.setError("Insira um valor válido");
-            valido = false;
-        }
-
-        if(visitaTecnicaViewModel.getAcessoAndaime().getValue() == null){
-            edt_acesso_andaime.setError("Insira um valor válido");
+        if(visitaTecnicaViewModel.getAcessoTelhado().getValue() == null){
+            Toast.makeText(requireActivity(), "Defina o acesso ao telhado", Toast.LENGTH_SHORT).show();
             valido = false;
         }
 
         if(valido){
-            edt_acesso_escada.setError(null);
-            edt_acesso_andaime.setError(null);
             Navigation.findNavController(v).navigate(R.id.action_fragmentVisitaTecnica_04_to_fragmentVisitaTecnica_05);
         }
     }
@@ -382,9 +327,7 @@ public class FragmentVisitaTecnica_04 extends Fragment {
         edt_largura_telhado = view.findViewById(R.id.edt_vt_largura_telhado);
         edt_comprimento_telhado = view.findViewById(R.id.edt_vt_comprimento_telhado);
         edt_altura_telhado = view.findViewById(R.id.edt_vt_altura_telhado);
-        edt_acesso_escada = view.findViewById(R.id.edt_vt_acesso_escada);
-        edt_acesso_andaime = view.findViewById(R.id.edt_vt_acesso_andaime);
-        edt_obs_finais = view.findViewById(R.id.edt_vt_obs_finais);
         foto_acesso_telhado = view.findViewById(R.id.foto_acesso_telhado);
+        rg_acessoTelhado = view.findViewById(R.id.rg_acessoTelhado);
     }
 }

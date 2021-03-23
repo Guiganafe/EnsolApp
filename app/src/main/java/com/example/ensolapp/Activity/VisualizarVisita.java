@@ -118,10 +118,6 @@ public class VisualizarVisita extends AppCompatActivity {
 
         orientacao_telhado_visualizar.setText(visitaTecnica.getOrientacaoTelhado());
 
-        escada_acesso_visualizar.setText(visitaTecnica.getAcessoEscada());
-
-        andaime_acesso_visualizar.setText(visitaTecnica.getAcessoAndaime());
-
         if(visitaTecnica.getAmperagemDisjuntosEntrada() != null){
             amperagem_disjuntor_visualizar.setText(visitaTecnica.getAmperagemDisjuntosEntrada());
         } else {

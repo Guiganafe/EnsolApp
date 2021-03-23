@@ -17,6 +17,7 @@ public class VisitaTecnicaViewModel extends ViewModel {
     private MutableLiveData<String> aperagemDisjuntosEntrada = new MutableLiveData<>();
     private MutableLiveData<String> condicaoPadraoEntrada = new MutableLiveData<>();
     private MutableLiveData<String> tipoRamal = new MutableLiveData<>();
+    private MutableLiveData<Integer> tipoRamalPosition = new MutableLiveData<>();
     private MutableLiveData<String> numeroUc = new MutableLiveData<>();
     private MutableLiveData<Integer> condicaoPadraoEntradaPositon = new MutableLiveData<>();
     private MutableLiveData<String> localInstalacaoModulos = new MutableLiveData<>();
@@ -31,6 +32,7 @@ public class VisitaTecnicaViewModel extends ViewModel {
     private MutableLiveData<String> comprimentoTelhado = new MutableLiveData<>();
     private MutableLiveData<String> alturaTelhado = new MutableLiveData<>();
     private MutableLiveData<String> acessoTelhado = new MutableLiveData<>();
+    private MutableLiveData<Integer> acessoTelhadoPosition = new MutableLiveData<>();
     private MutableLiveData<String> obsFinais = new MutableLiveData<>();
     private MutableLiveData<Bitmap> fotoPadraoEntrada = new MutableLiveData<>();
     private MutableLiveData<Bitmap> fotoOrientacaoTelhado = new MutableLiveData<>();
@@ -257,6 +259,14 @@ public class VisitaTecnicaViewModel extends ViewModel {
         this.tipoRamal.setValue(tipoRamal);
     }
 
+    public LiveData<Integer> getTipoRamalPosition() {
+        return tipoRamalPosition;
+    }
+
+    public void setTipoRamalPosition(Integer tipoRamalPosition) {
+        this.tipoRamalPosition.setValue(tipoRamalPosition);
+    }
+
     public LiveData<String> getNumeroUc() {
         return numeroUc;
     }
@@ -271,5 +281,13 @@ public class VisitaTecnicaViewModel extends ViewModel {
 
     public void setAcessoTelhado(String acessoTelhado) {
         this.acessoTelhado.setValue(acessoTelhado);
+    }
+
+    public LiveData<Integer> getAcessoTelhadoPosition() {
+        return acessoTelhadoPosition;
+    }
+
+    public void setAcessoTelhadoPosition(Integer acessoTelhadoPosition) {
+        this.acessoTelhadoPosition.setValue(acessoTelhadoPosition);
     }
 }

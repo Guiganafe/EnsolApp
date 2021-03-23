@@ -188,16 +188,6 @@ public class GerarPDF {
         Paragraph p_acesso = new Paragraph(new Text("Acesso ao telhado").setFontSize(20));
         document.add(p_acesso);
 
-        if(visitaTecnica.getAcessoEscada() != null){
-            Paragraph paragraph = new Paragraph(new Text("Escada (até 5 metros): " + visitaTecnica.getAcessoEscada()).setFontSize(20));
-            document.add(paragraph);
-        }
-
-        if(visitaTecnica.getAcessoAndaime() != null){
-            Paragraph paragraph = new Paragraph(new Text("Andaime (acima de 5 metros): " + visitaTecnica.getAcessoAndaime()).setFontSize(20));
-            document.add(paragraph);
-        }
-
         if(visitaTecnica.getObsFinais() != null){
             Paragraph paragraph = new Paragraph(new Text("Observações finais: " + visitaTecnica.getObsFinais()).setFontSize(20));
             document.add(paragraph);

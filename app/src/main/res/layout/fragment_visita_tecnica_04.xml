@@ -114,23 +114,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Foto do local de instalação do inversor"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/foto_instalacao_inversor"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_margin="5dp"
-                android:padding="40dp"
-                android:src="@drawable/ic_add_a_photo"
-                android:background="@drawable/borders"
-                android:contentDescription="Foto do local de instalação do inversor" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
                 android:text="Foto de acesso ao telhado"
                 android:textStyle="bold" />
 
@@ -143,21 +126,6 @@
                 android:src="@drawable/ic_add_a_photo"
                 android:background="@drawable/borders"
                 android:contentDescription="Foto padrão" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/edt_vt_obs_finais"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:hint="Observações finais">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:lines="3"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
