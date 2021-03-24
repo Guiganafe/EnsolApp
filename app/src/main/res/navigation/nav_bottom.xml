@@ -3,16 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_bottom"
-    app:startDestination="@id/perfilFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
-        android:id="@+id/coletasFragment"
-        android:name="com.example.ensolapp.Fragments.ColetasFragment"
-        android:label="fragment_coletas"
-        tools:layout="@layout/fragment_coletas" />
+        android:id="@+id/visitasTecicasFragment"
+        android:name="com.example.ensolapp.Fragments.VisitasTecnicasFragment"
+        android:label="fragment_visitas_tecnicas"
+        tools:layout="@layout/fragment_visitas_tecnicas" />
+
     <fragment
-        android:id="@+id/perfilFragment"
+        android:id="@+id/homeFragment"
         android:name="com.example.ensolapp.Fragments.PerfilFragment"
-        android:label="fragment_perfil"
+        android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/entregasFragment"
+        android:name="com.example.ensolapp.Fragments.EntregasFragment"
+        android:label="fragment_entregas"
+        tools:layout="@layout/fragment_entregas" />
 </navigation>

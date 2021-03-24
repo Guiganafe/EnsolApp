@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class ColetasFragment extends Fragment implements VisitaTecnicaAdapter.onVisitaTecnicaItemListenner{
+public class VisitasTecnicasFragment extends Fragment implements VisitaTecnicaAdapter.onVisitaTecnicaItemListenner{
 
     private FloatingActionButton fab_novo_form;
     private TextView tv_dia_selecionado, tv_sem_visitas;
@@ -47,7 +47,7 @@ public class ColetasFragment extends Fragment implements VisitaTecnicaAdapter.on
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_coletas, container, false);
+        return inflater.inflate(R.layout.fragment_visitas_tecnicas, container, false);
     }
 
     @Override
