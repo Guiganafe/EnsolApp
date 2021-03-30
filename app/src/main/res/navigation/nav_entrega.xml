@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_entrega"
+    app:startDestination="@id/fragmentEntrega_01">
+
+    <fragment
+        android:id="@+id/fragmentEntrega_01"
+        android:name="com.example.ensolapp.Fragments.FragmentEntrega_01"
+        android:label="fragment_entrega_01"
+        tools:layout="@layout/fragment_entrega_01" >
+        <action
+            android:id="@+id/action_fragmentEntrega_01_to_fragmentEntrega_02"
+            app:destination="@id/fragmentEntrega_02" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentEntrega_02"
+        android:name="com.example.ensolapp.Fragments.FragmentEntrega_02"
+        android:label="fragment_entrega_02"
+        tools:layout="@layout/fragment_entrega_02" >
+        <action
+            android:id="@+id/action_fragmentEntrega_02_to_fragmentEntrega_03"
+            app:destination="@id/fragmentEntrega_03" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentEntrega_03"
+        android:name="com.example.ensolapp.Fragments.FragmentEntrega_03"
+        android:label="fragment_entrega_03"
+        tools:layout="@layout/fragment_entrega_03" >
+        <action
+            android:id="@+id/action_fragmentEntrega_03_to_fragmentEntrega_04"
+            app:destination="@id/fragmentEntrega_04" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentEntrega_04"
+        android:name="com.example.ensolapp.Fragments.FragmentEntrega_04"
+        android:label="fragment_entrega_04"
+        tools:layout="@layout/fragment_entrega_04" >
+        <action
+            android:id="@+id/action_fragmentEntrega_04_to_fragmentEntrega_05"
+            app:destination="@id/fragmentEntrega_05" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentEntrega_05"
+        android:name="com.example.ensolapp.Fragments.FragmentEntrega_05"
+        android:label="fragment_entrega_05"
+        tools:layout="@layout/fragment_entrega_05" >
+        <action
+            android:id="@+id/action_fragmentEntrega_05_to_fragmentEntrega_06"
+            app:destination="@id/fragmentEntrega_06" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentEntrega_06"
+        android:name="com.example.ensolapp.Fragments.FragmentEntrega_06"
+        android:label="fragment_entrega_06"
+        tools:layout="@layout/fragment_entrega_06" />
+</navigation>

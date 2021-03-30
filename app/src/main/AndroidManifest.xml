@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/logo_ensol"
         android:supportsRtl="true"
         android:theme="@style/Theme.EnsolApp">
-        <activity android:name=".Activity.EntregaActivity"></activity>
+        <activity android:name=".Activity.EntregaActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Activity.VisualizarVisita" />
         <activity android:name=".Activity.SplashActivity">
             <intent-filter>

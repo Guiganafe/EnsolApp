@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.FragmentEntrega_06">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:text="Confirmar entrega"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"/>
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textView"
+        android:layout_above="@id/linearLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/layout_data_visita_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="Data da visita: "/>
+
+                <TextView
+                    android:id="@+id/data_visita_confirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="12/02/2021"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_tipo_cliente_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="Tipo de cliente: "/>
+
+                <TextView
+                    android:id="@+id/tipo_cliente_confirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="Jurídico"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_nome_cliente_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold"
+                    android:text="Nome cliente: "/>
+
+                <TextView
+                    android:id="@+id/nome_cliente_confirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Guilherme"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_razao_social_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold"
+                    android:text="Razão social: "/>
+
+                <TextView
+                    android:id="@+id/razao_social_confirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="LDTA"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_responsavel_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold"
+                    android:text="Responsável: "/>
+
+                <TextView
+                    android:id="@+id/responsavel_confirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Eu"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_telefone_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="Telefone: "/>
+
+                <TextView
+                    android:id="@+id/telefone_confirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="(67) 99999-9999"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_cpf_cnpj_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="CPF/CNPJ: "/>
+
+                <TextView
+                    android:id="@+id/cpf_cnpj_confirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:text="123.456.789-10"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_email_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold"
+                    android:text="E-mail: "/>
+
+                <TextView
+                    android:id="@+id/email_confirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="email@email.com"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_endereco_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold"
+                    android:text="Endereço: "/>
+
+                <TextView
+                    android:id="@+id/endereco_confirmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Rua sem saída"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/estrutura_fixacao_textView_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Estrutura de fixação montada no telhado:"/>
+
+            <ImageView
+                android:id="@+id/estrutura_fixacao_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Estrutura de fixação montada no telhado" />
+
+            <TextView
+                android:id="@+id/modulos_instalados_textView_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Módulos instalados no telhado:"/>
+
+            <ImageView
+                android:id="@+id/modulos_instalados_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Foto padrão" />
+
+            <TextView
+                android:id="@+id/string_box_instaçada_aberta_textView_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="String Box instalada (aberta com ligacoes):"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/string_box_instaçada_aberta_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Foto padrão" />
+
+            <TextView
+                android:id="@+id/medidas_tensao_textView_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Medidas de tensão da String Box e/ou entrada do inversor"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/medidas_tensao_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Foto padrão" />
+
+            <TextView
+                android:id="@+id/obs_finais_textView_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Observações finais"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/obs_finais_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Eu gostei da visita" />
+
+            <TextView
+                android:id="@+id/ressalvas_textView_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Ressalvas do telhado"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ressalvas_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Telhado bonito" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnentrega_voltar_passo_5"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="5dp"
+            android:backgroundTint="@color/yellow"
+            android:text="Voltar" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_entrega_finalizar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginStart="5dp"
+            android:backgroundTint="@color/blue"
+            android:text="Finalizar" />
+
+    </LinearLayout>
+
+</RelativeLayout>

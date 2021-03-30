@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Fragments.FragmentEntrega_01">
 
     <TextView
@@ -11,7 +12,7 @@
         android:layout_height="100dp"
         android:background="@color/blue"
         android:gravity="center"
-        android:text="Entrega"
+        android:text="Entrega \n Informações sobre o cliente"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_alignParentTop="true"/>
