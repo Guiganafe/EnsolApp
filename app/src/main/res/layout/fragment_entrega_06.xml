@@ -29,7 +29,6 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/layout_data_visita_confirmar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -43,7 +42,6 @@
                     android:text="Data da visita: "/>
 
                 <TextView
-                    android:id="@+id/data_visita_confirmar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -53,7 +51,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_tipo_cliente_confirmar"
+                android:id="@+id/layout_tipo_cliente_confirmar_entrega"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -67,7 +65,7 @@
                     android:text="Tipo de cliente: "/>
 
                 <TextView
-                    android:id="@+id/tipo_cliente_confirmar"
+                    android:id="@+id/tipo_cliente_confirmar_entrega"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -310,6 +308,96 @@
 
             <ImageView
                 android:id="@+id/medidas_tensao_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Foto padrão" />
+
+            <TextView
+                android:id="@+id/string_quadro_instalado_textView_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="String Box CA / Quadro AC instalado"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/string_quadro_instalado_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Foto padrão" />
+
+            <TextView
+                android:id="@+id/tensao_string_quadro_textView_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Medidas de tensão da String Box e/ou Quadro AC conectado"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/tensao_string_quadro_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Foto padrão" />
+
+            <TextView
+                android:id="@+id/ponto_conexao_textView_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Ponto de conexão do circuito CA"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ponto_conexao_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Foto padrão" />
+
+            <TextView
+                android:id="@+id/layout_final_textView_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Layout final de instalação do kit"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/layout_final_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:padding="40dp"
+                android:src="@drawable/ic_add_a_photo"
+                android:background="@drawable/borders"
+                android:contentDescription="Foto padrão" />
+
+            <TextView
+                android:id="@+id/placas_Seguranca_textView_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Placas de segurança"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/placas_Seguranca_confirmar"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
