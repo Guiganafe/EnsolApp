@@ -78,7 +78,7 @@
             android:layout_weight="1"
             android:layout_marginEnd="5dp"
             android:backgroundTint="@color/yellow"
-            android:text="Cancelar" />
+            android:text="Voltar" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_entrega_avancar_passo_6"

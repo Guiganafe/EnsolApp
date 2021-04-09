@@ -42,6 +42,7 @@
                     android:text="Data da visita: "/>
 
                 <TextView
+                    android:id="@+id/data_visita_confirmar_entrega"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -75,7 +76,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_nome_cliente_confirmar"
+                android:id="@+id/layout_nome_cliente_confirmar_entrega"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -88,7 +89,7 @@
                     android:text="Nome cliente: "/>
 
                 <TextView
-                    android:id="@+id/nome_cliente_confirmar"
+                    android:id="@+id/nome_cliente_confirmar_entrega"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -99,7 +100,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_razao_social_confirmar"
+                android:id="@+id/layout_razao_social_confirmar_entrega"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -112,7 +113,7 @@
                     android:text="Razão social: "/>
 
                 <TextView
-                    android:id="@+id/razao_social_confirmar"
+                    android:id="@+id/razao_social_confirmar_entrega"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -123,7 +124,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_responsavel_confirmar"
+                android:id="@+id/layout_responsavel_confirmar_entrega"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -136,7 +137,7 @@
                     android:text="Responsável: "/>
 
                 <TextView
-                    android:id="@+id/responsavel_confirmar"
+                    android:id="@+id/responsavel_confirmar_entrega"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -147,7 +148,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_telefone_confirmar"
+                android:id="@+id/layout_telefone_confirmar_entrega"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -161,7 +162,7 @@
                     android:text="Telefone: "/>
 
                 <TextView
-                    android:id="@+id/telefone_confirmar"
+                    android:id="@+id/telefone_confirmar_entrega"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -171,7 +172,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_cpf_cnpj_confirmar"
+                android:id="@+id/layout_cpf_cnpj_confirmar_entrega"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -185,7 +186,7 @@
                     android:text="CPF/CNPJ: "/>
 
                 <TextView
-                    android:id="@+id/cpf_cnpj_confirmar"
+                    android:id="@+id/cpf_cnpj_confirmar_entrega"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -195,7 +196,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_email_confirmar"
+                android:id="@+id/layout_email_confirmar_entrega"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -208,7 +209,7 @@
                     android:text="E-mail: "/>
 
                 <TextView
-                    android:id="@+id/email_confirmar"
+                    android:id="@+id/email_confirmar_entrega"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -219,7 +220,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/layout_endereco_confirmar"
+                android:id="@+id/layout_endereco_confirmar_entrega"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -232,7 +233,7 @@
                     android:text="Endereço: "/>
 
                 <TextView
-                    android:id="@+id/endereco_confirmar"
+                    android:id="@+id/endereco_confirmar_entrega"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -281,7 +282,7 @@
                 android:contentDescription="Foto padrão" />
 
             <TextView
-                android:id="@+id/string_box_instaçada_aberta_textView_confirmar"
+                android:id="@+id/string_box_instalada_aberta_textView_confirmar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -289,7 +290,7 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/string_box_instaçada_aberta_confirmar"
+                android:id="@+id/string_box_instalada_aberta_confirmar"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_margin="5dp"
@@ -450,7 +451,7 @@
         android:layout_alignParentBottom="true">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnentrega_voltar_passo_5"
+            android:id="@+id/btn_entrega_voltar_passo_5"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_weight="1"

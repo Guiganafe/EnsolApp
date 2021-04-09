@@ -34,6 +34,7 @@ import com.example.ensolapp.ViewModels.EntregaViewModel;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -63,6 +64,7 @@ public class FragmentEntrega_03 extends Fragment {
         super.onCreate(savedInstanceState);
         clienteViewModel =  new ViewModelProvider(requireActivity()).get(ClienteViewModel.class);
         entregaViewModel =  new ViewModelProvider(requireActivity()).get(EntregaViewModel.class);
+        storageRef = FirebaseStorage.getInstance().getReference();
     }
 
     @Override
@@ -237,8 +239,6 @@ public class FragmentEntrega_03 extends Fragment {
                 requireActivity().sendBroadcast(mediaScanIntent);
                 currentPhotoPath = "";
                 enviarDadosFoto_1();
-            } else {
-                Toast.makeText(requireActivity(), "Erro, tire a foto novamente!", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -259,8 +259,6 @@ public class FragmentEntrega_03 extends Fragment {
                 requireActivity().sendBroadcast(mediaScanIntent);
                 currentPhotoPath = "";
                 enviarDadosFoto_2();
-            } else {
-                Toast.makeText(requireActivity(), "Erro, tire a foto novamente!", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -281,8 +279,6 @@ public class FragmentEntrega_03 extends Fragment {
                 requireActivity().sendBroadcast(mediaScanIntent);
                 currentPhotoPath = "";
                 enviarDadosFoto_3();
-            } else {
-                Toast.makeText(requireActivity(), "Erro, tire a foto novamente!", Toast.LENGTH_SHORT).show();
             }
         }
     }
