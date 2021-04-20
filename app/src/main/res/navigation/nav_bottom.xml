@@ -22,4 +22,10 @@
         android:name="com.example.ensolapp.Fragments.EntregasFragment"
         android:label="fragment_entregas"
         tools:layout="@layout/fragment_entregas" />
+
+    <fragment
+        android:id="@+id/orcamentosFragment"
+        android:name="com.example.ensolapp.Fragments.OrcamentosFragment"
+        android:label="fragment_orcamentos"
+        tools:layout="@layout/fragment_orcamentos" />
 </navigation>
