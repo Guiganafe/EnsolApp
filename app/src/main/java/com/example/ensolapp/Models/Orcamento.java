@@ -1,14 +1,17 @@
 package com.example.ensolapp.Models;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Orcamento {
+    private Date dataSolicitacao;
     private String nomeCliente;
     private String contato;
     private String potenciaDesejada;
     private String localizacao;
     private String fotoContaUrl;
+    private String tecnicoId;
 
     public Orcamento() {
     }
@@ -61,15 +64,33 @@ public class Orcamento {
         this.fotoContaUrl = fotoContaUrl;
     }
 
+    public Date getDataSolicitacao() {
+        return dataSolicitacao;
+    }
+
+    public void setDataSolicitacao(Date dataSolicitacao) {
+        this.dataSolicitacao = dataSolicitacao;
+    }
+
+    public String getTecnicoId() {
+        return tecnicoId;
+    }
+
+    public void setTecnicoId(String tecnicoId) {
+        this.tecnicoId = tecnicoId;
+    }
+
     public Map<String, Object> toMap(){
 
         Map<String, Object> orcamento = new HashMap<>();
 
+        orcamento.put("dataSolicitacao", getDataSolicitacao());
         orcamento.put("nomeCliente", getNomeCliente());
         orcamento.put("contato", getContato());
         orcamento.put("potenciaDesejada", getPotenciaDesejada());
         orcamento.put("localizacao", getLocalizacao());
         orcamento.put("fotoContaUrl", getFotoContaUrl());
+        orcamento.put("tecnicoId", getTecnicoId());
 
         return orcamento;
     }

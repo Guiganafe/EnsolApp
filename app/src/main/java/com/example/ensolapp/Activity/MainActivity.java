@@ -11,7 +11,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.ensolapp.Base.EntregaBase;
+import com.example.ensolapp.Base.OrcamentoBase;
 import com.example.ensolapp.Base.VisitaTecnicaBase;
+import com.example.ensolapp.Models.Orcamento;
 import com.example.ensolapp.Models.VisitaTecnica;
 import com.example.ensolapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         VisitaTecnicaBase.getInstance();
+        EntregaBase.getInstance();
+        OrcamentoBase.getInstance();
         inicializarComponentes();
     }
 

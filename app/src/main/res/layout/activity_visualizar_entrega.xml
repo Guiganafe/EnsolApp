@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.VisualizarEntrega">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/blue"
+            android:gravity="center"
+            android:text="Visualizar entrega"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"/>
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/textView">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Data da visita: "/>
+
+                    <TextView
+                        android:id="@+id/data_visita_visualizar_entrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="12/02/2021"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_tipo_cliente_visualizar_entrega"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Tipo de cliente: "/>
+
+                    <TextView
+                        android:id="@+id/tipo_cliente_visualizar_entrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="Jurídico"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_nome_cliente_visualizar_entrega"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textStyle="bold"
+                        android:text="Nome cliente: "/>
+
+                    <TextView
+                        android:id="@+id/nome_cliente_visualizar_entrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Guilherme"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_razao_social_visualizar_entrega"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textStyle="bold"
+                        android:text="Razão social: "/>
+
+                    <TextView
+                        android:id="@+id/razao_social_visualizar_entrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="LDTA"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_responsavel_visualizar_entrega"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textStyle="bold"
+                        android:text="Responsável: "/>
+
+                    <TextView
+                        android:id="@+id/responsavel_visualizar_entrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Eu"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_telefone_visualizar_entrega"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="Telefone: "/>
+
+                    <TextView
+                        android:id="@+id/telefone_visualizar_entrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="(67) 99999-9999"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_cpf_cnpj_visualizar_entrega"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:text="CPF/CNPJ: "/>
+
+                    <TextView
+                        android:id="@+id/cpf_cnpj_visualizar_entrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:text="123.456.789-10"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_email_visualizar_entrega"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textStyle="bold"
+                        android:text="E-mail: "/>
+
+                    <TextView
+                        android:id="@+id/email_visualizar_entrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="email@email.com"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_endereco_visualizar_entrega"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textStyle="bold"
+                        android:text="Endereço: "/>
+
+                    <TextView
+                        android:id="@+id/endereco_visualizar_entrega"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Rua sem saída"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/estrutura_fixacao_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="Estrutura de fixação montada no telhado:"/>
+
+                <ImageView
+                    android:id="@+id/estrutura_fixacao_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Estrutura de fixação montada no telhado" />
+
+                <TextView
+                    android:id="@+id/modulos_instalados_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:text="Módulos instalados no telhado:"/>
+
+                <ImageView
+                    android:id="@+id/modulos_instalados_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto padrão" />
+
+                <TextView
+                    android:id="@+id/string_box_instalada_aberta_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="String Box instalada (aberta com ligacoes):"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/string_box_instalada_aberta_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto padrão" />
+
+                <TextView
+                    android:id="@+id/medidas_tensao_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Medidas de tensão da String Box e/ou entrada do inversor"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/medidas_tensao_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto padrão" />
+
+                <TextView
+                    android:id="@+id/string_quadro_instalado_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="String Box CA / Quadro AC instalado"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/string_quadro_instalado_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto padrão" />
+
+                <TextView
+                    android:id="@+id/tensao_string_quadro_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Medidas de tensão da String Box e/ou Quadro AC conectado"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/tensao_string_quadro_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto padrão" />
+
+                <TextView
+                    android:id="@+id/ponto_conexao_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Ponto de conexão do circuito CA"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/ponto_conexao_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto padrão" />
+
+                <TextView
+                    android:id="@+id/layout_final_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Layout final de instalação do kit"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/layout_final_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto padrão" />
+
+                <TextView
+                    android:id="@+id/placas_Seguranca_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Placas de segurança"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/placas_Seguranca_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="5dp"
+                    android:padding="40dp"
+                    android:src="@drawable/ic_add_a_photo"
+                    android:background="@drawable/borders"
+                    android:contentDescription="Foto padrão" />
+
+                <TextView
+                    android:id="@+id/obs_finais_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Observações finais"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/obs_finais_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Eu gostei da visita" />
+
+                <TextView
+                    android:id="@+id/ressalvas_textView_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Ressalvas do telhado"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/ressalvas_visualizar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Telhado bonito" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_download_form_entrega"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        app:tint="@color/white"
+        android:src="@drawable/ic_download"
+        android:backgroundTint="@color/yellow"
+        app:borderWidth="0dp"
+        android:contentDescription="Baixar formulário"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

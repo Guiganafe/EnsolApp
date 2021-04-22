@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.widget.Toast;
 
 import com.example.ensolapp.Models.Orcamento;
 import com.example.ensolapp.R;
@@ -59,6 +60,11 @@ public class GerarPDFOrcamento {
         p_sub.setTextAlignment(TextAlignment.CENTER);
         document.add(p_sub);
 
+        if(orcamento.getDataSolicitacao() != null){
+            Paragraph paragraph = new Paragraph(new Text("Data da solicitação: " + orcamento.getNomeCliente()).setFontSize(20));
+            document.add(paragraph);
+        }
+
         if(orcamento.getNomeCliente() != null){
             Paragraph paragraph = new Paragraph(new Text("Nome do cliente: " + orcamento.getNomeCliente()).setFontSize(20));
             document.add(paragraph);
@@ -93,6 +99,9 @@ public class GerarPDFOrcamento {
             p_foto_padrao.setTextAlignment(TextAlignment.CENTER);
             document.add(p_foto_padrao);
         }
+
+        document.close();
+        Toast.makeText(context, "PDF baixado com sucesso", Toast.LENGTH_SHORT).show();
 
     }
 }

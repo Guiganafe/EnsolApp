@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.ensolapp.Firebase.FirebaseService;
 import com.example.ensolapp.Models.Orcamento;
 import com.example.ensolapp.R;
 import com.example.ensolapp.Utils.GerarPDFEntrega;
@@ -40,21 +42,28 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class OrcamentoActivity extends AppCompatActivity {
 
     private Button btn_cancelar, btn_finalizar;
-    private TextInputLayout nome, contato, potencia_desejada, localizacao;
-    private ImageView foto_conta;
+    private TextInputLayout data, nome, contato, potencia_desejada, localizacao;
+    private ImageView foto_conta = null;
     private String fotoUrl;
+    private DatePickerDialog datePickerDialog;
+    private int dia, mes, ano;
+    private Calendar calendar;
     public static final int CAMERA_PERM_CODE = 101;
     public static final int CAMERA_REQUEST_CODE = 102;
     public static final int GALLERY_REQUEST_CODE = 103;
     private String currentPhotoPath;
     Bitmap fotoGaleria = null;
     Bitmap foto_comprimida = null;
+    Orcamento orcamento = new Orcamento();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private StorageReference storageRef;
 
@@ -65,6 +74,35 @@ public class OrcamentoActivity extends AppCompatActivity {
         storageRef = FirebaseStorage.getInstance().getReference();
         inicializarComponentes();
         onClickController();
+        timeController();
+    }
+
+    private void timeController() {
+        dia = calendar.get(Calendar.DAY_OF_MONTH);
+        mes = calendar.get(Calendar.MONTH);
+        ano = calendar.get(Calendar.YEAR);
+
+        data.getEditText().setOnClickListener(v -> {
+            datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+                String dataDia = String.format(Locale.getDefault(),"%02d/%02d/%04d", dayOfMonth, month+1, year);
+                data.getEditText().setText(dataDia);
+
+                SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+                Date dataDate = null;
+                try {
+                    dataDate = formato.parse(dataDia);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Calendar dataDoDia = Calendar.getInstance(Locale.getDefault());
+                dataDate.setHours(dataDoDia.getTime().getHours());
+                dataDate.setMinutes(dataDoDia.getTime().getMinutes());
+                orcamento.setDataSolicitacao(dataDate);
+
+            },ano, mes, dia);
+            datePickerDialog.show();
+        });
     }
 
     private void onClickController() {
@@ -235,7 +273,10 @@ public class OrcamentoActivity extends AppCompatActivity {
     private void validarDados(View view) {
         boolean valido = true;
 
-        if(TextUtils.isEmpty(nome.getEditText().getText().toString())){
+        if(TextUtils.isEmpty(data.getEditText().getText().toString())){
+            data.setError("Insira a data");
+            valido = false;
+        } else if(TextUtils.isEmpty(nome.getEditText().getText().toString())){
             nome.setError("Insira um nome");
             valido = false;
         } else if(TextUtils.isEmpty(contato.getEditText().getText().toString())){
@@ -261,13 +302,12 @@ public class OrcamentoActivity extends AppCompatActivity {
     }
 
     private void salvarForm() {
-        Orcamento orcamento = new Orcamento();
-
         orcamento.setNomeCliente(nome.getEditText().getText().toString());
         orcamento.setContato(contato.getEditText().getText().toString());
         orcamento.setPotenciaDesejada(potencia_desejada.getEditText().getText().toString());
         orcamento.setLocalizacao(localizacao.getEditText().getText().toString());
         orcamento.setFotoContaUrl(fotoUrl);
+        orcamento.setTecnicoId(FirebaseService.getFirebaseUser().getUid());
 
         Bitmap fotoFinal = null;
         if(foto_comprimida != null){
@@ -304,8 +344,10 @@ public class OrcamentoActivity extends AppCompatActivity {
     }
 
     private void inicializarComponentes() {
+        calendar = Calendar.getInstance();
         btn_cancelar = findViewById(R.id.btn_orcamento_cancelar);
         btn_finalizar = findViewById(R.id.btn_orcamento_finalizar);
+        data = findViewById(R.id.edt_orcamento_data);
         nome = findViewById(R.id.edt_orcamento_nome_cliente);
         contato = findViewById(R.id.edt_orcamento_contato);
         potencia_desejada = findViewById(R.id.edt_orcamento_potencia_desejada);
