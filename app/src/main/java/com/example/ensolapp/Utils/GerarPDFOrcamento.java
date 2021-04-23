@@ -61,8 +61,9 @@ public class GerarPDFOrcamento {
         document.add(p_sub);
 
         if(orcamento.getDataSolicitacao() != null){
-            Paragraph paragraph = new Paragraph(new Text("Data da solicitação: " + orcamento.getNomeCliente()).setFontSize(20));
-            document.add(paragraph);
+            int dia = orcamento.getDataSolicitacao().getDay(), mes = orcamento.getDataSolicitacao().getMonth(), ano = orcamento.getDataSolicitacao().getYear();
+            Paragraph data = new Paragraph(new Text(String.format(Locale.getDefault(),"Data da visita: %02d/%02d/%04d", dia, mes+1, ano)).setFontSize(20));
+            document.add(data);
         }
 
         if(orcamento.getNomeCliente() != null){
