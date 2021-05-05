@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ import java.text.SimpleDateFormat;
 public class VisualizarOrcamento extends AppCompatActivity {
 
     private Orcamento orcamento;
-    private TextView data, nome, telefone, potencia, localizacao;
+    private TextView data, nome, telefone, potencia, localizacao, observacao;
     private ImageView foto_conta;
     private FloatingActionButton baixar_pdf;
     private int position;
@@ -67,6 +68,9 @@ public class VisualizarOrcamento extends AppCompatActivity {
         telefone.setText(orcamento.getContato());
         potencia.setText(orcamento.getPotenciaDesejada());
         localizacao.setText(orcamento.getLocalizacao());
+        if(!TextUtils.isEmpty(orcamento.getObservacao())){
+            observacao.setText(orcamento.getObservacao());
+        }
 
         foto_conta.setBackground(null);
         foto_conta.setPadding(0, 0, 0, 0);
@@ -91,6 +95,7 @@ public class VisualizarOrcamento extends AppCompatActivity {
         telefone = findViewById(R.id.telefone_visualizar_orcamento);
         potencia = findViewById(R.id.potencia_desejada_visualizar_orcamento);
         localizacao = findViewById(R.id.localizacao_visualizar_orcamento);
+        observacao = findViewById(R.id.observacao_visualizar_orcamento);
         foto_conta = findViewById(R.id.foto_conta_visualizar_orcamento);
         baixar_pdf = findViewById(R.id.fab_download_form_orcamento);
     }

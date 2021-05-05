@@ -86,6 +86,11 @@ public class GerarPDFOrcamento {
             document.add(paragraph);
         }
 
+        if(orcamento.getObservacao() != null){
+            Paragraph paragraph = new Paragraph(new Text("Observação: " + orcamento.getObservacao()).setFontSize(20));
+            document.add(paragraph);
+        }
+
         if(foto != null){
             //Configuração de exibição da foto
             ByteArrayOutputStream stream = new ByteArrayOutputStream();

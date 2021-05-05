@@ -1,5 +1,7 @@
 package com.example.ensolapp.Models;
 
+import android.text.TextUtils;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,17 +13,19 @@ public class Orcamento {
     private String potenciaDesejada;
     private String localizacao;
     private String fotoContaUrl;
+    private String observacao;
     private String tecnicoId;
 
     public Orcamento() {
     }
 
-    public Orcamento(String nomeCliente, String contato, String potenciaDesejada, String localizacao, String fotoContaUrl) {
+    public Orcamento(String nomeCliente, String contato, String potenciaDesejada, String localizacao, String fotoContaUrl, String observacao) {
         this.nomeCliente = nomeCliente;
         this.contato = contato;
         this.potenciaDesejada = potenciaDesejada;
         this.localizacao = localizacao;
         this.fotoContaUrl = fotoContaUrl;
+        this.observacao = observacao;
     }
 
     public String getNomeCliente() {
@@ -72,6 +76,14 @@ public class Orcamento {
         this.dataSolicitacao = dataSolicitacao;
     }
 
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
     public String getTecnicoId() {
         return tecnicoId;
     }
@@ -90,6 +102,9 @@ public class Orcamento {
         orcamento.put("potenciaDesejada", getPotenciaDesejada());
         orcamento.put("localizacao", getLocalizacao());
         orcamento.put("fotoContaUrl", getFotoContaUrl());
+        if(!TextUtils.isEmpty(getObservacao())){
+            orcamento.put("observacao", getObservacao());
+        }
         orcamento.put("tecnicoId", getTecnicoId());
 
         return orcamento;

@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.ensolapp.BuildConfig;
 import com.example.ensolapp.Firebase.FirebaseService;
 import com.example.ensolapp.Models.Orcamento;
 import com.example.ensolapp.R;
@@ -51,7 +52,7 @@ import java.util.Locale;
 public class OrcamentoActivity extends AppCompatActivity {
 
     private Button btn_cancelar, btn_finalizar;
-    private TextInputLayout data, nome, contato, potencia_desejada, localizacao;
+    private TextInputLayout data, nome, contato, potencia_desejada, localizacao, observacao;
     private ImageView foto_conta = null;
     private String fotoUrl;
     private DatePickerDialog datePickerDialog;
@@ -157,7 +158,7 @@ public class OrcamentoActivity extends AppCompatActivity {
             // Continue only if the File was successfully created
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
-                        "br.com.justworks.android.fileprovider",
+                        BuildConfig.APPLICATION_ID + ".provider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
@@ -306,6 +307,9 @@ public class OrcamentoActivity extends AppCompatActivity {
         orcamento.setContato(contato.getEditText().getText().toString());
         orcamento.setPotenciaDesejada(potencia_desejada.getEditText().getText().toString());
         orcamento.setLocalizacao(localizacao.getEditText().getText().toString());
+        if(!TextUtils.isEmpty(observacao.getEditText().getText())){
+            orcamento.setObservacao(observacao.getEditText().getText().toString());
+        }
         orcamento.setFotoContaUrl(fotoUrl);
         orcamento.setTecnicoId(FirebaseService.getFirebaseUser().getUid());
 
@@ -352,6 +356,7 @@ public class OrcamentoActivity extends AppCompatActivity {
         contato = findViewById(R.id.edt_orcamento_contato);
         potencia_desejada = findViewById(R.id.edt_orcamento_potencia_desejada);
         localizacao = findViewById(R.id.edt_orcamento_localizacao);
+        observacao = findViewById(R.id.edt_orcamento_observacao);
         foto_conta = findViewById(R.id.foto_conta_energia);
     }
 }

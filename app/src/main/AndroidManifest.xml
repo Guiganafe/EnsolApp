@@ -13,7 +13,8 @@
         android:roundIcon="@drawable/logo_ensol"
         android:supportsRtl="true"
         android:theme="@style/Theme.EnsolApp">
-        <activity android:name=".Activity.VisualizarOrcamento"></activity>
+        <activity android:name=".Activity.VisualizarOrcamento"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Activity.VisualizarEntrega" />
         <activity
             android:name=".Activity.OrcamentoActivity"

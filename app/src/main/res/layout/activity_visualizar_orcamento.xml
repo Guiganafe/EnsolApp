@@ -145,7 +145,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Telhado bonito" />
+                    android:text="Afonso pena" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Observação"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/observacao_visualizar_orcamento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Sem observação" />
 
             </LinearLayout>
 
