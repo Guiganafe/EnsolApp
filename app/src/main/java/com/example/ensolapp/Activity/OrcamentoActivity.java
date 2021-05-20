@@ -289,9 +289,10 @@ public class OrcamentoActivity extends AppCompatActivity {
         } else if(TextUtils.isEmpty(localizacao.getEditText().getText().toString())){
             localizacao.setError("Insira a localizção");
             valido = false;
-        }
-
-        if(foto_conta == null){
+        } else if(TextUtils.isEmpty(observacao.getEditText().getText().toString())) {
+            observacao.setError("Insira uma observação");
+            valido = false;
+        } else if(foto_conta == null){
             Toast.makeText(this, "Insira a foto da conta", Toast.LENGTH_SHORT).show();
             valido = false;
         }
