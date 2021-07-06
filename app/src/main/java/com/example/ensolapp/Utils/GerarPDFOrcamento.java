@@ -94,7 +94,7 @@ public class GerarPDFOrcamento {
         if(foto != null){
             //Configuração de exibição da foto
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);

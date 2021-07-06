@@ -212,7 +212,7 @@ public class GerarPDF {
             //Configuração de exibição da foto
             foto_padrao = fotos.getFoto_padrao();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_padrao.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_padrao.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
@@ -228,7 +228,7 @@ public class GerarPDF {
             //Configuração de exibição da foto
             foto_acesso_telhado = fotos.getFoto_acesso_telhado();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_acesso_telhado.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_acesso_telhado.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
@@ -244,7 +244,7 @@ public class GerarPDF {
             //Configuração de exibição da foto
             foto_orientacao_telhado = fotos.getFoto_orientacao_telhado();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_orientacao_telhado.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_orientacao_telhado.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
@@ -260,7 +260,7 @@ public class GerarPDF {
             //Configuração de exibição da foto
             foto_inversor = fotos.getFotoLocalInstalacaoInversor();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_inversor.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_inversor.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);

@@ -17,11 +17,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.ensolapp.Base.EntregaBase;
-import com.example.ensolapp.Base.VisitaTecnicaBase;
 import com.example.ensolapp.Models.Entrega;
 import com.example.ensolapp.Models.FotosEntrega;
 import com.example.ensolapp.R;
-import com.example.ensolapp.Utils.GerarPDF;
 import com.example.ensolapp.Utils.GerarPDFEntrega;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

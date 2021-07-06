@@ -1,10 +1,15 @@
 package com.example.ensolapp.Utils;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.example.ensolapp.Models.Entrega;
@@ -123,7 +128,7 @@ public class GerarPDFEntrega {
             //Configuração de exibição da foto
             foto_estrutura_telhado = fotosEntrega.getFotoEstruturaFixacaoTelhado();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_estrutura_telhado.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_estrutura_telhado.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
@@ -139,7 +144,7 @@ public class GerarPDFEntrega {
             //Configuração de exibição da foto
             foto_modulo_telhado = fotosEntrega.getFotoModulosTelhado();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_modulo_telhado.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_modulo_telhado.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
@@ -155,7 +160,7 @@ public class GerarPDFEntrega {
             //Configuração de exibição da foto
             foto_string_box_aberta = fotosEntrega.getFotoStringBoxAberta();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_string_box_aberta.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_string_box_aberta.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
@@ -171,7 +176,7 @@ public class GerarPDFEntrega {
             //Configuração de exibição da foto
             foto_medida_tensao_conectado = fotosEntrega.getFotoMedidaTensaoConectado();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_medida_tensao_conectado.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_medida_tensao_conectado.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
@@ -187,7 +192,7 @@ public class GerarPDFEntrega {
             //Configuração de exibição da foto
             foto_string_box_instalada = fotosEntrega.getFotoStringBoxInstalada();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_string_box_instalada.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_string_box_instalada.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
@@ -203,7 +208,7 @@ public class GerarPDFEntrega {
             //Configuração de exibição da foto
             foto_tensao_string_box = fotosEntrega.getFotoTensaoStringBox();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_tensao_string_box.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_tensao_string_box.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
@@ -219,7 +224,7 @@ public class GerarPDFEntrega {
             //Configuração de exibição da foto
             foto_ponto_conexao = fotosEntrega.getFotoPontoConexaoCa();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_ponto_conexao.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_ponto_conexao.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
@@ -235,7 +240,7 @@ public class GerarPDFEntrega {
             //Configuração de exibição da foto
             foto_final_instalação = fotosEntrega.getFotoFinalInstalacaoKit();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_final_instalação.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_final_instalação.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
@@ -251,7 +256,7 @@ public class GerarPDFEntrega {
             //Configuração de exibição da foto
             foto_placa_seguranca = fotosEntrega.getFotoPlacaSeguranca();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            foto_placa_seguranca.compress(Bitmap.CompressFormat.PNG, 40, stream);
+            foto_placa_seguranca.compress(Bitmap.CompressFormat.PNG, 30, stream);
             byte[] fotoByte = stream.toByteArray();
             ImageData fotoData = ImageDataFactory.create(fotoByte);
             Image img = new Image(fotoData);
